@@ -86,3 +86,18 @@ Source keys:
 - His individual role in Turing Robotics unknown.
 - gh CLI unauthenticated in pass 1; public REST API used instead; only 1 repo so no further READMEs.
 - Fetch budget: pass 1 used 6; pass 2 used 6 (site, FIRST awards, FRCTR, Valmeto about, evrimagaci/yazilar, plus search-only calls). Total about 12 of 15.
+
+## Browser pass (2026-11-07, in-app browser)
+- "ufens" = Emirhan Durmuşkaya: the Evrim Ağacı profile @ufens shows the name "Emirhan Durmuşkaya" — https://evrimagaci.org/ufens — high
+- Academia profile "ufens" shows the name "Emirhan Durmuşkaya", with 3 papers — https://independent.academia.edu/ufens — high
+- Self-described interests: science (especially physics), philosophy (religion, science, ontology), history; researches and writes on them — https://evrimagaci.org/ufens/blog (About) — high
+- Own blogs linked from his Evrim Ağacı profile: https://ufenss.blogspot.com, https://ufensblog.wordpress.com, Medium "ufens" — high
+- 6 unique works (2022-11 → 2025), cross-posted across Evrim Ağacı, Blogger, WordPress and Academia; stubs are in research/posts/tr/ — high
+- An ORCID iD is listed on his Evrim Ağacı profile (value not copied; ask before use) — medium
+
+### Flagged — needs approval (from the Evrim Ağacı About panel)
+- Birth date, age and school grade are shown there — sensitive, do not use (values deliberately not recorded here)
+- City of residence (İstanbul) — ask
+- Second email address (not the public contact email) — do not use
+- Instagram handle — ask
+- ORCID iD — ask
