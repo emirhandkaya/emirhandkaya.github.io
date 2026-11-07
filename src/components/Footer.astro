@@ -1,5 +1,5 @@
 ---
-import { SOCIALS } from '../data/site';
+import { EMAIL, SOCIALS } from '../data/site';
 import { localizedPath, t, type Lang } from '../i18n';
 
 export interface Props {
@@ -11,6 +11,13 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
+  <div class="container cta">
+    <p class="cta-kicker">{t(lang, 'footer.ctaKicker')}</p>
+    <p class="cta-title">{t(lang, 'footer.ctaTitle')}</p>
+    <a class="cta-mail" href={`mailto:${EMAIL}`}>
+      {EMAIL} <span aria-hidden="true">→</span>
+    </a>
+  </div>
   <div class="container inner">
     <ul class="cluster socials" role="list" aria-label={t(lang, 'a11y.social')}>
       {SOCIALS.map((s) => (
@@ -35,6 +42,42 @@ const year = new Date().getFullYear();
   .site-footer {
     border-block-start: var(--border-w) solid var(--border);
     margin-block-start: var(--space-8);
+    background: linear-gradient(180deg, var(--bg-raised), var(--bg-sunken));
+  }
+  .cta {
+    display: grid;
+    gap: var(--space-3);
+    padding-block: var(--space-8) var(--space-7);
+    border-block-end: var(--border-w) solid var(--border);
+  }
+  .cta-kicker {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--accent);
+  }
+  .cta-title {
+    font-size: var(--step-4);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--leading-tight);
+    max-width: var(--measure);
+  }
+  .cta-mail {
+    justify-self: start;
+    font-size: var(--step-1);
+    overflow-wrap: anywhere;
+  }
+  .cta-mail span {
+    display: inline-block;
+    transition: translate var(--dur) var(--ease);
+  }
+  .cta-mail:hover span {
+    translate: var(--reveal-shift) 0;
+  }
+  @media print {
+    .cta {
+      display: none;
+    }
   }
   .inner {
     display: flex;

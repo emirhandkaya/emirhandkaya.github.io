@@ -64,12 +64,23 @@ h3 {
 }
 a {
   color: var(--accent);
-  text-underline-offset: 0.2em;
+  text-underline-offset: 0.22em;
   text-decoration-thickness: var(--border-w);
-  transition: color var(--dur-fast) var(--ease);
+  text-decoration-color: var(--accent-line);
+  transition:
+    color var(--dur-fast) var(--ease),
+    text-decoration-color var(--dur-fast) var(--ease);
 }
 a:hover {
-  text-decoration-thickness: var(--focus-w);
+  color: var(--accent-strong);
+  text-decoration-color: currentColor;
+}
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+html {
+  scrollbar-color: var(--border-strong) var(--bg);
 }
 code,
 kbd,
@@ -219,6 +230,10 @@ time,
   font-family: var(--font-mono);
   font-size: var(--step--1);
   color: var(--accent);
+  padding: 0 var(--space-2);
+  border: var(--border-w) solid var(--accent-line);
+  border-radius: var(--radius-pill);
+  background: var(--accent-soft);
 }
 .section-head h2 {
   font-size: var(--step-2);
@@ -242,7 +257,13 @@ time,
   position: relative;
   display: grid;
   gap: var(--space-2) var(--space-5);
-  padding-block: var(--space-5);
+  padding: var(--space-5) var(--space-3);
+  margin-inline: calc(var(--space-3) * -1);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--dur) var(--ease);
+}
+.row:hover {
+  background: linear-gradient(90deg, var(--accent-soft), transparent 70%);
 }
 .row-meta {
   font-family: var(--font-mono);
@@ -376,8 +397,28 @@ time,
   color: var(--accent-ink);
 }
 .button--primary:hover {
-  background: var(--text);
-  border-color: var(--text);
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+  color: var(--accent-ink);
+}
+.button:not(.button--primary):hover {
+  color: var(--text);
+  background: var(--accent-soft);
+}
+/* Faint dot grid that fades out; used behind the home hero */
+.dots {
+  position: relative;
+  isolation: isolate;
+}
+.dots::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(var(--dot) var(--dot-size), transparent var(--dot-size));
+  background-size: var(--dot-gap) var(--dot-gap);
+  mask-image: radial-gradient(ellipse at 70% 30%, black, transparent 70%);
+  pointer-events: none;
 }
 
 /* Print: content only (resume PDF). Colors come from the print tokens. */

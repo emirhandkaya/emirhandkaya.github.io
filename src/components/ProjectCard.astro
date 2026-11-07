@@ -47,8 +47,14 @@ const href = localizedPath(lang, `projects/${slugOf(project)}`);
 <style>
   .index {
     font-family: var(--font-mono);
-    font-size: var(--step-4);
+    font-size: var(--step-5);
+    font-weight: var(--weight-bold);
     line-height: var(--leading-display);
+    color: transparent;
+    -webkit-text-stroke: var(--stroke) var(--accent);
+    transition: color var(--dur) var(--ease);
+  }
+  .project-row:hover .index {
     color: var(--accent);
   }
   .body {

@@ -62,7 +62,7 @@ const person = {
 
 <Base lang={lang} path="">
   <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(person)} />
-  <section class="container hero" aria-labelledby="hero-title">
+  <section class="container hero dots" aria-labelledby="hero-title">
     <div class="hero-main">
       <p class="eyebrow">{t(lang, 'home.eyebrow')}</p>
       <h1 id="hero-title">{t(lang, 'site.name')}</h1>
@@ -223,8 +223,11 @@ const person = {
   }
   .now {
     align-self: end;
+    border: var(--border-w) solid var(--border);
     border-inline-start: var(--focus-w) solid var(--accent);
-    padding-inline-start: var(--space-5);
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, var(--accent-soft), var(--bg-raised) 60%);
+    padding: var(--space-5);
     display: grid;
     gap: var(--space-4);
   }
@@ -266,11 +269,21 @@ const person = {
     gap: var(--space-1);
     padding: var(--space-5) var(--space-4) var(--space-5) 0;
   }
+  .stats > div + div {
+    border-inline-start: var(--border-w) solid var(--border);
+    padding-inline-start: var(--space-4);
+  }
+  .stats > div:nth-child(3) {
+    border-inline-start: 0;
+    padding-inline-start: 0;
+  }
   .stats dd {
     order: -1;
     margin: 0;
     font-family: var(--font-mono);
-    font-size: var(--step-3);
+    font-size: var(--step-4);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
     color: var(--text);
   }
   .stats dt {
@@ -321,6 +334,10 @@ const person = {
   @media (min-width: 48rem) {
     .stats {
       grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .stats > div:nth-child(3) {
+      border-inline-start: var(--border-w) solid var(--border);
+      padding-inline-start: var(--space-4);
     }
     .timeline li {
       grid-template-columns: var(--row-meta-w) minmax(0, 1fr);

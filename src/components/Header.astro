@@ -112,6 +112,9 @@ const isActive = (item: string) => current === `${item}/` || current.startsWith(
   .nav a[aria-current='page'] .num {
     color: var(--accent);
   }
+  .nav a[aria-current='page'] {
+    box-shadow: inset 0 calc(var(--focus-w) * -1) 0 var(--accent);
+  }
   .num {
     font-family: var(--font-mono);
     font-size: var(--step--1);
