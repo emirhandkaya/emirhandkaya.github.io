@@ -1,0 +1,54 @@
+---
+import { localizedPath, t, type Lang } from '../i18n';
+
+export interface Props {
+  lang: Lang;
+  tags: string[];
+  /** Tag to mark as current (on a tag page). */
+  current?: string;
+}
+
+const { lang, tags, current } = Astro.props;
+---
+
+{tags.length > 0 && (
+  <ul class="tags" role="list" aria-label={t(lang, 'blog.tags')}>
+    {tags.map((tag) => (
+      <li>
+        <a href={localizedPath(lang, `blog/tags/${tag}`)} aria-current={tag === current ? 'page' : undefined}>
+          #{tag}
+        </a>
+      </li>
+    ))}
+  </ul>
+)}
+
+<style>
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-2);
+    list-style: none;
+    padding: 0;
+  }
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--target-min);
+    padding-inline: var(--space-2);
+    border: var(--border-w) solid var(--border);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: var(--tracking-mono);
+    color: var(--text-muted);
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+  }
+  a:hover,
+  a[aria-current] {
+    color: var(--text);
+    border-color: var(--accent);
+  }
+</style>

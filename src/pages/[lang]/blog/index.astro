@@ -1,0 +1,47 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PostCard from '../../../components/PostCard.astro';
+import TagList from '../../../components/TagList.astro';
+import { LANGS, t, type Lang } from '../../../i18n';
+import { getPosts, tagsOf } from '../../../lib/posts';
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const posts = await getPosts(lang);
+const tags = tagsOf(posts, lang);
+---
+
+<Base lang={lang} title={t(lang, 'blog.title')} description={t(lang, 'blog.description')} path="blog">
+  <div class="container">
+    <header class="page-head">
+      <h1>{t(lang, 'blog.title')}</h1>
+      <p class="muted">{t(lang, 'blog.description')}</p>
+      <p class="mono muted">{t(lang, 'blog.count', { n: posts.length })}</p>
+    </header>
+    <ul class="list" role="list">
+      {posts.map((post) => (
+        <li>
+          <PostCard post={post} lang={lang} />
+        </li>
+      ))}
+    </ul>
+    <section class="all-tags" aria-labelledby="all-tags">
+      <h2 id="all-tags">{t(lang, 'blog.allTags')}</h2>
+      <TagList lang={lang} tags={tags} />
+    </section>
+  </div>
+</Base>
+
+<style>
+  .all-tags {
+    margin-block-start: var(--space-7);
+    display: grid;
+    gap: var(--space-4);
+  }
+  .all-tags h2 {
+    font-size: var(--step-1);
+  }
+</style>

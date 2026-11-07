@@ -1,0 +1,207 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import PostMeta from '../../../components/PostMeta.astro';
+import TagList from '../../../components/TagList.astro';
+import { LANGS, localizedPath, otherLang, t, type Lang } from '../../../i18n';
+import { describe, getPosts, slugOf, sourceKey, type Post } from '../../../lib/posts';
+import { readingTime } from '../../../lib/readingTime';
+
+export async function getStaticPaths() {
+  const all = await getCollection('blog', (p) => !p.data.draft);
+  const ids = new Set(all.map((p) => p.id));
+  const paths: {
+    params: { lang: Lang; slug: string };
+    props: { post: Post; newer?: Post; older?: Post; hasTranslation: boolean };
+  }[] = [];
+  for (const lang of LANGS) {
+    const posts = await getPosts(lang); // newest first
+    posts.forEach((post, i) => {
+      const slug = slugOf(post);
+      paths.push({
+        params: { lang, slug },
+        props: {
+          post,
+          newer: posts[i - 1],
+          older: posts[i + 1],
+          hasTranslation: ids.has(`${otherLang(lang)}/${slug}`),
+        },
+      });
+    });
+  }
+  return paths;
+}
+
+const lang = Astro.params.lang as Lang;
+const { post, newer, older, hasTranslation } = Astro.props;
+const { Content } = await render(post);
+const slug = slugOf(post);
+const d = post.data;
+const description = describe(post);
+const minutes = readingTime(post.body ?? '');
+
+// Canonical: originals point to their first publication; translations are self-canonical (spec §3).
+const isTranslation = Boolean(d.translatedFrom);
+const canonical = !isTranslation && d.canonicalUrl ? d.canonicalUrl : undefined;
+const source = d.canonicalUrl ? t(lang, `sources.${sourceKey(d.canonicalUrl)}`) : undefined;
+// A partial Academia entry carries only the abstract: point readers to the full paper.
+const abstractOnly =
+  d.translationStatus === 'partial' && d.canonicalUrl && sourceKey(d.canonicalUrl) === 'academia';
+
+const site = Astro.site ?? new URL(Astro.url.origin);
+const selfUrl = new URL(localizedPath(lang, `blog/${slug}`), site).href;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: d.title,
+  description,
+  datePublished: d.date.toISOString(),
+  ...(d.updated && { dateModified: d.updated.toISOString() }),
+  inLanguage: lang,
+  keywords: d.tags.join(', '),
+  url: selfUrl,
+  mainEntityOfPage: selfUrl,
+  author: { '@type': 'Person', name: t(lang, 'site.name'), url: new URL('/', site).href },
+  ...(d.canonicalUrl && { isBasedOn: d.canonicalUrl }),
+};
+---
+
+<Base
+  lang={lang}
+  title={d.title}
+  description={description}
+  path={`blog/${slug}`}
+  altPath={hasTranslation ? `blog/${slug}` : 'blog'}
+  canonical={canonical}
+  type="article"
+>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+  <article class="container post">
+    <header class="post-head">
+      <p class="mono">
+        <a href={localizedPath(lang, 'blog')}>← {t(lang, 'blog.allPosts')}</a>
+      </p>
+      <h1>{d.title}</h1>
+      <PostMeta lang={lang} date={d.date} updated={d.updated} minutes={minutes} />
+      <TagList lang={lang} tags={d.tags} />
+    </header>
+
+    <aside class="notes card" aria-label={t(lang, 'blog.readOriginal')}>
+      {d.translatedFrom && (
+        <p>
+          {t(lang, `blog.translatedFrom.${d.translatedFrom}`)}{' '}
+          <a href={localizedPath(d.translatedFrom, `blog/${slug}`)} hreflang={d.translatedFrom}>
+            {t(lang, 'blog.readTranslationSource')}
+          </a>
+        </p>
+      )}
+      {d.translatedFrom && d.translationStatus !== 'done' && (
+        <p class="muted">
+          {t(lang, d.translationStatus === 'needed' ? 'blog.translationNeeded' : 'blog.translationPartial')}
+        </p>
+      )}
+      {d.canonicalUrl && source && (
+        <p>
+          {t(lang, 'blog.originallyPublished', { site: source })}{' '}
+          <a href={d.canonicalUrl} rel="noopener" target="_blank">
+            {t(lang, 'blog.readOriginal')}
+            <span class="visually-hidden">{t(lang, 'a11y.newTab')}</span>
+          </a>
+        </p>
+      )}
+      {d.mirrors && d.mirrors.length > 0 && (
+        <p class="muted">
+          {t(lang, 'blog.alsoOn')}{' '}
+          {d.mirrors.map((url, i) => (
+            <>
+              {i > 0 && ', '}
+              <a href={url} rel="noopener" target="_blank">
+                {t(lang, `sources.${sourceKey(url)}`)}
+                <span class="visually-hidden">{t(lang, 'a11y.newTab')}</span>
+              </a>
+            </>
+          ))}
+        </p>
+      )}
+    </aside>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    {abstractOnly && d.canonicalUrl && source && (
+      <p class="full-paper">
+        <a class="button button--primary" href={d.canonicalUrl} rel="noopener" target="_blank">
+          {t(lang, 'blog.fullPaper', { site: source })}
+          <span class="visually-hidden">{t(lang, 'a11y.newTab')}</span>
+        </a>
+      </p>
+    )}
+
+    {(newer || older) && (
+      <nav class="pager" aria-label={t(lang, 'blog.pager')}>
+        {older && (
+          <a class="card prev" href={localizedPath(lang, `blog/${slugOf(older)}`)} rel="prev">
+            <span class="mono muted">← {t(lang, 'blog.prev')}</span>
+            <span>{older.data.title}</span>
+          </a>
+        )}
+        {newer && (
+          <a class="card next" href={localizedPath(lang, `blog/${slugOf(newer)}`)} rel="next">
+            <span class="mono muted">{t(lang, 'blog.next')} →</span>
+            <span>{newer.data.title}</span>
+          </a>
+        )}
+      </nav>
+    )}
+  </article>
+</Base>
+
+<style>
+  .post {
+    display: grid;
+    gap: var(--space-6);
+    padding-block-start: var(--space-7);
+  }
+  .post > * {
+    max-width: var(--measure);
+  }
+  .post-head {
+    display: grid;
+    gap: var(--space-4);
+  }
+  .post-head h1 {
+    font-size: var(--step-4);
+  }
+  .notes {
+    display: grid;
+    gap: var(--space-2);
+    font-size: var(--step--1);
+    padding: var(--space-4);
+  }
+  .notes:empty {
+    display: none;
+  }
+  .pager {
+    display: grid;
+    gap: var(--space-4);
+    margin-block-start: var(--space-6);
+  }
+  .pager a {
+    display: grid;
+    gap: var(--space-1);
+    color: var(--text);
+    text-decoration: none;
+  }
+  .pager .next {
+    text-align: end;
+  }
+  @media (min-width: 48rem) {
+    .pager {
+      grid-template-columns: 1fr 1fr;
+    }
+    .pager .next {
+      grid-column: 2;
+    }
+  }
+</style>

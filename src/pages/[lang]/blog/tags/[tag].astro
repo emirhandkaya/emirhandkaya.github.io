@@ -1,0 +1,47 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import PostCard from '../../../../components/PostCard.astro';
+import { LANGS, localizedPath, t, type Lang } from '../../../../i18n';
+import { getPosts, tagsOf } from '../../../../lib/posts';
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (const lang of LANGS) {
+    const posts = await getPosts(lang);
+    for (const tag of tagsOf(posts, lang)) {
+      paths.push({ params: { lang, tag }, props: { posts: posts.filter((p) => p.data.tags.includes(tag)) } });
+    }
+  }
+  return paths;
+}
+
+const lang = Astro.params.lang as Lang;
+const tag = Astro.params.tag as string;
+const { posts } = Astro.props;
+// Tags differ per language, so the other-language link falls back to its blog index.
+---
+
+<Base
+  lang={lang}
+  title={t(lang, 'blog.taggedTitle', { tag })}
+  description={t(lang, 'blog.taggedDescription', { tag })}
+  path={`blog/tags/${tag}`}
+  altPath="blog"
+>
+  <div class="container">
+    <header class="page-head">
+      <p class="mono">
+        <a href={localizedPath(lang, 'blog')}>← {t(lang, 'blog.allPosts')}</a>
+      </p>
+      <h1>{t(lang, 'blog.taggedTitle', { tag })}</h1>
+      <p class="mono muted">{t(lang, 'blog.count', { n: posts.length })}</p>
+    </header>
+    <ul class="list" role="list">
+      {posts.map((post) => (
+        <li>
+          <PostCard post={post} lang={lang} />
+        </li>
+      ))}
+    </ul>
+  </div>
+</Base>

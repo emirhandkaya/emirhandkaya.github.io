@@ -35,6 +35,44 @@
     "academia": "Academia",
     "medium": "Medium"
   },
+  "blog": {
+    "title": "Yazılar",
+    "description": "Bilim, felsefe ve tarih üzerine yazılarım.",
+    "readingTime": "{n} dk okuma",
+    "updated": "Güncellendi:",
+    "tags": "Etiketler",
+    "allTags": "Tüm etiketler",
+    "allPosts": "Tüm yazılar",
+    "taggedTitle": "#{tag} etiketli yazılar",
+    "taggedDescription": "#{tag} etiketli yazılar.",
+    "count": "{n} yazı",
+    "originallyPublished": "İlk olarak {site} üzerinde yayımlandı.",
+    "readOriginal": "Orijinalini okuyun",
+    "fullPaper": "Makalenin tamamını {site} üzerinde okuyun",
+    "alsoOn": "Ayrıca yayımlandığı yerler:",
+    "translatedFrom": {
+      "tr": "Türkçe orijinalinden çevrilmiştir.",
+      "en": "İngilizce orijinalinden çevrilmiştir."
+    },
+    "readTranslationSource": "Orijinal yazı",
+    "translationPartial": "Bu çeviri kısmidir.",
+    "translationNeeded": "Bu yazının çevirisi devam ediyor.",
+    "pager": "Yazılar arasında gezinme",
+    "prev": "Önceki yazı",
+    "next": "Sonraki yazı"
+  },
+  "rss": {
+    "title": "Emirhan Durmuşkaya — Yazılar",
+    "description": "Emirhan Durmuşkaya'nın Türkçe yazıları."
+  },
+  "sources": {
+    "evrimagaci": "Evrim Ağacı",
+    "academia": "Academia",
+    "blogger": "Blogger",
+    "wordpress": "WordPress",
+    "medium": "Medium",
+    "web": "web"
+  },
   "notFound": {
     "title": "Sayfa bulunamadı",
     "body": "Aradığınız sayfa yok ya da taşınmış olabilir.",

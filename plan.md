@@ -32,6 +32,7 @@ Stages 0–1 produced the scaffold (Astro 7 minimal + MDX + sitemap + RSS, repor
 - `src/lib/readingTime.ts`; `src/components/{PostCard,TagList}.astro`.
 - Pages `src/pages/[lang]/blog/index.astro`, `[...slug].astro`, `tags/[tag].astro`, `[lang]/rss.xml.ts` (getStaticPaths over the locales).
 - Proof: 6 posts × 2 locales built; RSS for both; reading time shown; i18n-parity passes for the blog.
+- As built (departures): added `src/lib/posts.ts` (slug, sorting, derived description, source-site names) and `src/components/PostMeta.astro` (date + reading time). Tag pages link to the other language's blog index, since tags differ per language. The "translation in progress/partial" note shows only on translations (`translatedFrom` set); a partial Academia entry also gets a "Read the full paper" button. `src/content/{projects,resume}/` hold a `.gitkeep` until M3/M4; the glob loader warns "No files found" until then. Fixed `npm run links`: the shell had stripped the `^` from the skip regex, so it scanned 0 links; options now live in `linkinator.config.json`. It now fails on the M3/M4 routes that don't exist yet (home, projects, resume, about, contact), which is expected until M4.
 
 **M3 — Projects**
 

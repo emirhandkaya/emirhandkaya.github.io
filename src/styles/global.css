@@ -134,6 +134,72 @@ time,
   white-space: nowrap;
 }
 
+/* Long-form content (rendered Markdown) */
+.prose > * + * {
+  margin-block-start: var(--space-4);
+}
+.prose :is(h2, h3, h4) {
+  margin-block-start: var(--space-7);
+}
+.prose h2 {
+  font-size: var(--step-2);
+}
+.prose :is(h3, h4) {
+  font-size: var(--step-1);
+}
+.prose :is(ul, ol) {
+  padding-inline-start: var(--space-5);
+}
+.prose li + li {
+  margin-block-start: var(--space-2);
+}
+.prose blockquote {
+  border-inline-start: var(--focus-w) solid var(--accent);
+  padding-inline-start: var(--space-4);
+  color: var(--text-muted);
+}
+.prose :not(pre) > code {
+  background: var(--surface-strong);
+  padding: 0 var(--space-1);
+  border-radius: var(--radius-sm);
+  font-size: var(--code-size);
+}
+.prose pre {
+  overflow-x: auto;
+  padding: var(--space-4);
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius);
+  font-size: var(--step--1);
+}
+.prose table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+.prose :is(th, td) {
+  border: var(--border-w) solid var(--border);
+  padding: var(--space-2) var(--space-3);
+  text-align: start;
+}
+.prose hr {
+  border: 0;
+  border-block-start: var(--border-w) solid var(--border);
+}
+
+/* Section header used on list pages */
+.page-head {
+  padding-block: var(--space-8) var(--space-6);
+}
+.page-head > * + * {
+  margin-block-start: var(--space-3);
+}
+.list {
+  display: grid;
+  gap: var(--space-4);
+  list-style: none;
+  padding: 0;
+}
+
 /* Surfaces */
 .card {
   background: var(--surface);

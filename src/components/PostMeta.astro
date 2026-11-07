@@ -1,0 +1,40 @@
+---
+// Date + reading time line, shared by PostCard and the post page.
+import { formatDate, t, type Lang } from '../i18n';
+
+export interface Props {
+  lang: Lang;
+  date: Date;
+  updated?: Date;
+  minutes: number;
+}
+
+const { lang, date, updated, minutes } = Astro.props;
+---
+
+<p class="meta">
+  <time datetime={date.toISOString().slice(0, 10)}>{formatDate(lang, date)}</time>
+  {updated && (
+    <>
+      <span aria-hidden="true">·</span>
+      <span>
+        {t(lang, 'blog.updated')}{' '}
+        <time datetime={updated.toISOString().slice(0, 10)}>{formatDate(lang, updated)}</time>
+      </span>
+    </>
+  )}
+  <span aria-hidden="true">·</span>
+  <span>{t(lang, 'blog.readingTime', { n: minutes })}</span>
+</p>
+
+<style>
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: var(--tracking-mono);
+    color: var(--text-muted);
+  }
+</style>

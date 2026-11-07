@@ -11,7 +11,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "node scripts/report.mjs check \"astro check\" \"eslint .\"",
-    "links": "node scripts/report.mjs links \"linkinator dist --recurse --skip \\\"^https?://(?!localhost)\\\"\"",
+    "links": "node scripts/report.mjs links \"linkinator dist --config linkinator.config.json\"",
     "lighthouse": "node scripts/report.mjs lighthouse \"lhci autorun\"",
     "i18n-parity": "node scripts/report.mjs i18n-parity \"node scripts/i18n-parity.mjs\"",
     "format": "prettier --write ."

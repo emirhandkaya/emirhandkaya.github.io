@@ -35,6 +35,44 @@
     "academia": "Academia",
     "medium": "Medium"
   },
+  "blog": {
+    "title": "Writing",
+    "description": "Essays on science, philosophy and history.",
+    "readingTime": "{n} min read",
+    "updated": "Updated",
+    "tags": "Tags",
+    "allTags": "All tags",
+    "allPosts": "All posts",
+    "taggedTitle": "Posts tagged #{tag}",
+    "taggedDescription": "Posts tagged #{tag}.",
+    "count": "{n} posts",
+    "originallyPublished": "Originally published on {site}.",
+    "readOriginal": "Read the original",
+    "fullPaper": "Read the full paper on {site}",
+    "alsoOn": "Also published on:",
+    "translatedFrom": {
+      "tr": "Translated from the Turkish original.",
+      "en": "Translated from the English original."
+    },
+    "readTranslationSource": "Original post",
+    "translationPartial": "This translation is partial.",
+    "translationNeeded": "Translation in progress.",
+    "pager": "Post navigation",
+    "prev": "Previous post",
+    "next": "Next post"
+  },
+  "rss": {
+    "title": "Emirhan Durmuşkaya — Writing",
+    "description": "Essays by Emirhan Durmuşkaya, in English."
+  },
+  "sources": {
+    "evrimagaci": "Evrim Ağacı",
+    "academia": "Academia",
+    "blogger": "Blogger",
+    "wordpress": "WordPress",
+    "medium": "Medium",
+    "web": "the web"
+  },
   "notFound": {
     "title": "Page not found",
     "body": "The page you are looking for does not exist or may have moved.",
