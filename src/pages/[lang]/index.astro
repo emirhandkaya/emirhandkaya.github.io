@@ -18,6 +18,8 @@ const projects = (await getProjects(lang)).filter((p) => p.data.featured).slice(
 const posts = await getPosts(lang);
 const latest = posts.slice(0, 3);
 const resume = (await getEntry('resume', lang))?.data;
+const TURING_URL = 'https://team10141.com/';
+const VALMETO_URL = 'https://www.valmeto.com/';
 const PRESS_URL =
   'https://girisimciturk.tv/girisimcilik/turkiyeden-dunya-sahnesine-bir-robotik-takiminin-basari-hikayesi/';
 
@@ -29,9 +31,9 @@ const stats = [
   { value: String(posts.length), label: t(lang, 'home.statPosts') },
 ];
 const now = [
-  { k: t(lang, 'home.nowTuring'), v: t(lang, 'home.nowTuringText') },
+  { k: t(lang, 'home.nowTuring'), v: t(lang, 'home.nowTuringText'), href: TURING_URL },
   { k: t(lang, 'home.nowGrants'), v: t(lang, 'home.nowGrantsText') },
-  { k: t(lang, 'home.nowValmeto'), v: t(lang, 'home.nowValmetoText') },
+  { k: t(lang, 'home.nowValmeto'), v: t(lang, 'home.nowValmetoText'), href: VALMETO_URL },
 ];
 
 const site = Astro.site ?? new URL(Astro.url.origin);
@@ -43,7 +45,10 @@ const person = {
   url: new URL(localizedPath(lang), site).href,
   jobTitle: 'Founder, Valmeto',
   worksFor: { '@type': 'Organization', name: 'Valmeto', url: 'https://www.valmeto.com/' },
-  founder: [{ '@type': 'Organization', name: 'Turing Robotics (FRC #10141)' }],
+  founder: [
+    { '@type': 'Organization', name: 'Turing Robotics (FRC #10141)', url: TURING_URL },
+    { '@type': 'Organization', name: 'Valmeto', url: VALMETO_URL },
+  ],
   alumniOf: { '@type': 'HighSchool', name: 'Halil Bekmezci Anadolu Lisesi' },
   address: { '@type': 'PostalAddress', addressLocality: 'İstanbul', addressCountry: 'TR' },
   knowsLanguage: ['tr', 'en'],
@@ -88,7 +93,15 @@ const person = {
       <dl>
         {now.map((n) => (
           <div>
-            <dt>{n.k}</dt>
+            <dt>
+              {n.href ? (
+                <a href={n.href} rel="noopener" target="_blank">
+                  {n.k} ↗<span class="visually-hidden"> {t(lang, 'a11y.newTab')}</span>
+                </a>
+              ) : (
+                n.k
+              )}
+            </dt>
             <dd>{n.v}</dd>
           </div>
         ))}
@@ -142,7 +155,15 @@ const person = {
             <p class="row-meta">{e.period}</p>
             <div>
               <h3>{e.title}</h3>
-              <p class="muted">{e.org}</p>
+              <p class="muted">
+                {e.url ? (
+                  <a class="org-link" href={e.url} rel="noopener" target="_blank">
+                    {e.org} ↗<span class="visually-hidden"> {t(lang, 'a11y.newTab')}</span>
+                  </a>
+                ) : (
+                  e.org
+                )}
+              </p>
             </div>
           </li>
         ))}
@@ -253,6 +274,14 @@ const person = {
   }
   .now dt {
     font-weight: var(--weight-bold);
+  }
+  .now dt a,
+  .org-link {
+    color: inherit;
+  }
+  .now dt a:hover,
+  .org-link:hover {
+    color: var(--accent);
   }
   .now dd {
     margin: 0;

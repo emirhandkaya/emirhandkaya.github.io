@@ -13,7 +13,7 @@
       "org": "Turing Robotics — FRC #10141",
       "period": "2025 – present",
       "description": "The FIRST Robotics Competition team of Halil Bekmezci Anadolu Lisesi. Engineering, leadership and problem-solving through robotics.",
-      "url": "https://frc-events.firstinspires.org/team/10141"
+      "url": "https://team10141.com/"
     },
     {
       "title": "Central Referee Committee member & referee",
@@ -102,14 +102,40 @@
     "Python (intermediate)",
     "International trade"
   ],
-  "languages": ["Turkish (native)", "English (B2)"],
-  "interests": ["Creative writing", "Physics", "Philosophy", "International trade"],
+  "languages": [
+    "Turkish (native)",
+    "English (B2)"
+  ],
+  "interests": [
+    "Creative writing",
+    "Physics",
+    "Philosophy",
+    "International trade"
+  ],
   "links": [
-    { "label": "GitHub", "url": "https://github.com/emirhandkaya" },
-    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/emirhan-durmuskaya-973546239/" },
-    { "label": "Evrim Ağacı", "url": "https://evrimagaci.org/ufens" },
-    { "label": "Academia", "url": "https://independent.academia.edu/ufens" },
-    { "label": "Medium", "url": "https://medium.com/@ufens" },
-    { "label": "ORCID", "url": "https://orcid.org/0000-0003-4183-3247" }
+    {
+      "label": "GitHub",
+      "url": "https://github.com/emirhandkaya"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/emirhan-durmuskaya-973546239/"
+    },
+    {
+      "label": "Evrim Ağacı",
+      "url": "https://evrimagaci.org/ufens"
+    },
+    {
+      "label": "Academia",
+      "url": "https://independent.academia.edu/ufens"
+    },
+    {
+      "label": "Medium",
+      "url": "https://medium.com/@ufens"
+    },
+    {
+      "label": "ORCID",
+      "url": "https://orcid.org/0000-0003-4183-3247"
+    }
   ]
 }

@@ -132,4 +132,5 @@ Source keys:
 - Projects: TÜBİTAK 4006 Science Fair — led an applied science project (2025); Young Entrepreneurs — digital project lead (2023).
 - Research: articles on physics & philosophy (conceptual analysis).
 - Interests: creative writing, physics, philosophy, international trade. Languages: Turkish (native), English (B2).
+- Websites to link (owner, in chat): Turing Robotics https://team10141.com (title "Turing Robotics · FRC 10141", checked 200); Valmeto https://www.valmeto.com/.
 - Press: the GirişimcilikTürk TV article (PRESS, 9 April 2026) is an interview Emirhan gave about the team (owner) — use it as "interview".

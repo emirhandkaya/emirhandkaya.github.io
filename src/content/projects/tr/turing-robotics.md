@@ -10,6 +10,8 @@ status: active
 featured: true
 order: 1
 links:
+  - label: team10141.com
+    url: https://team10141.com/
   - label: FIRST takım sayfası
     url: https://frc-events.firstinspires.org/team/10141
   - label: 2026 İstanbul Regional ödülleri
