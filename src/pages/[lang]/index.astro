@@ -1,0 +1,165 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostCard from '../../components/PostCard.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { SOCIALS } from '../../data/site';
+import { LANGS, localizedPath, t, type Lang } from '../../i18n';
+import { getPosts } from '../../lib/posts';
+import { getProjects } from '../../lib/projects';
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const featured = (await getProjects(lang)).filter((p) => p.data.featured).slice(0, 3);
+const latest = (await getPosts(lang)).slice(0, 3);
+
+// JSON-LD Person — every field from research/profile-notes.md (SITE self-claims, Owner decisions).
+const site = Astro.site ?? new URL(Astro.url.origin);
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: t(lang, 'site.name'),
+  alternateName: 'Emirhan Durmuskaya',
+  url: new URL(localizedPath(lang), site).href,
+  jobTitle: 'Founder at Valmeto',
+  worksFor: { '@type': 'Organization', name: 'Valmeto', url: 'https://www.valmeto.com/' },
+  memberOf: { '@type': 'SportsTeam', name: 'Turing Robotics (FRC #10141)' },
+  address: { '@type': 'PostalAddress', addressLocality: 'İstanbul', addressCountry: 'TR' },
+  knowsAbout: ['Entrepreneurship', 'Industrial materials', 'FIRST Robotics Competition', 'Robotics', 'STEM'],
+  sameAs: SOCIALS.map((s) => s.url),
+};
+---
+
+<Base lang={lang} path="">
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(person)} />
+  <section class="container hero" aria-labelledby="hero-title">
+    <p class="role mono">{t(lang, 'home.role')}</p>
+    <h1 id="hero-title">{t(lang, 'site.name')}</h1>
+    <p class="intro muted">{t(lang, 'home.intro')}</p>
+    <p class="cluster ctas">
+      <a class="button button--primary" href={localizedPath(lang, 'projects')}>
+        {t(lang, 'home.ctaProjects')}
+      </a>
+      <a class="button" href={localizedPath(lang, 'resume')}>
+        {t(lang, 'home.ctaResume')}
+      </a>
+    </p>
+  </section>
+
+  <section class="container highlights-wrap" aria-labelledby="highlights">
+    <h2 id="highlights" class="visually-hidden">
+      {t(lang, 'home.highlights')}
+    </h2>
+    <ul class="highlights" role="list">
+      <li class="card">
+        <p class="hl-title">{t(lang, 'home.highlightWin')}</p>
+        <p class="mono muted">{t(lang, 'home.highlightWinSub')}</p>
+      </li>
+      <li class="card">
+        <p class="hl-title">{t(lang, 'home.highlightQualified')}</p>
+        <p class="mono muted">{t(lang, 'home.highlightQualifiedSub')}</p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="container block" aria-labelledby="featured">
+    <div class="block-head">
+      <h2 id="featured">{t(lang, 'home.featured')}</h2>
+      <a class="mono" href={localizedPath(lang, 'projects')}>
+        {t(lang, 'home.seeAllProjects')} →
+      </a>
+    </div>
+    <ul class="grid" role="list">
+      {featured.map((project) => (
+        <li>
+          <ProjectCard project={project} lang={lang} level={3} />
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="container block" aria-labelledby="latest">
+    <div class="block-head">
+      <h2 id="latest">{t(lang, 'home.latest')}</h2>
+      <a class="mono" href={localizedPath(lang, 'blog')}>
+        {t(lang, 'home.seeAllPosts')} →
+      </a>
+    </div>
+    <ul class="list" role="list">
+      {latest.map((post) => (
+        <li>
+          <PostCard post={post} lang={lang} level={3} />
+        </li>
+      ))}
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    display: grid;
+    gap: var(--space-4);
+    padding-block: var(--space-8) var(--space-7);
+  }
+  .role {
+    color: var(--accent);
+    font-size: var(--step--1);
+  }
+  .hero h1 {
+    font-size: var(--step-5);
+  }
+  .intro {
+    font-size: var(--step-1);
+    max-width: var(--measure);
+  }
+  .ctas {
+    margin-block-start: var(--space-3);
+  }
+  .highlights {
+    display: grid;
+    gap: var(--space-4);
+    list-style: none;
+    padding: 0;
+  }
+  .highlights .card {
+    display: grid;
+    gap: var(--space-1);
+    border-inline-start: var(--focus-w) solid var(--accent);
+  }
+  .hl-title {
+    font-weight: var(--weight-bold);
+  }
+  .block {
+    padding-block-start: var(--space-8);
+  }
+  .block-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-block-end: var(--space-5);
+  }
+  .block-head h2 {
+    font-size: var(--step-2);
+  }
+  .block-head a {
+    font-size: var(--step--1);
+  }
+  .grid {
+    display: grid;
+    gap: var(--space-4);
+    list-style: none;
+    padding: 0;
+  }
+  @media (min-width: 48rem) {
+    .highlights {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

@@ -256,6 +256,39 @@ time,
   border-color: var(--text);
 }
 
+/* Print: content only (resume PDF). Colors come from the print tokens. */
+.print-only {
+  display: none;
+}
+@media print {
+  .site-header,
+  .site-footer,
+  .skip-link,
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block;
+  }
+  main,
+  .container {
+    padding: 0;
+    max-width: none;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+  li,
+  .card {
+    break-inside: avoid;
+  }
+}
+
 /* Reduced motion: nothing moves */
 @media (prefers-reduced-motion: reduce) {
   *,

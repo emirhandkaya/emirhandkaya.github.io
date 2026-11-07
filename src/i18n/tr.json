@@ -33,7 +33,55 @@
     "linkedin": "LinkedIn",
     "evrimagaci": "Evrim Ağacı",
     "academia": "Academia",
-    "medium": "Medium"
+    "medium": "Medium",
+    "instagram": "Instagram",
+    "orcid": "ORCID"
+  },
+  "home": {
+    "role": "Girişimci · Valmeto kurucusu · Turing Robotics",
+    "intro": "İstanbul’da. FRC #10141 Turing Robotics takımının üyesi; bilim, felsefe ve tarih üzerine yazıyor.",
+    "ctaProjects": "Projeler",
+    "ctaResume": "Özgeçmiş",
+    "highlights": "Öne çıkanlar",
+    "highlightWin": "“Regional Winners” — 2026 İstanbul Regional",
+    "highlightWinSub": "Turing Robotics, FRC #10141",
+    "highlightQualified": "FIRST Championship (Houston) katılım hakkı",
+    "highlightQualifiedSub": "2026 sezonu",
+    "featured": "Öne çıkan projeler",
+    "latest": "Son yazılar",
+    "seeAllProjects": "Tüm projeler",
+    "seeAllPosts": "Tüm yazılar"
+  },
+  "about": {
+    "title": "Hakkımda",
+    "description": "Emirhan Durmuşkaya: İstanbul’da girişimci, FRC Turing Robotics üyesi ve yazar.",
+    "entrepreneur": "İstanbul’da yaşayan bir girişimciyim. Demir dışı metaller tedarik eden B2B uluslararası ticaret şirketi Valmeto’nun kurucusuyum.",
+    "robotics": "Halil Bekmezci Anadolu Lisesi’nin FIRST Robotics Competition takımı Turing Robotics’in (FRC #10141) üyesiyim. Takım 2026 İstanbul Regional’da “Regional Winners” ödülünü aldı ve Houston’daki FIRST Championship’e katılma hakkı kazandı.",
+    "roleTodo": "Takımdaki rolüm: TODO",
+    "writing": "Bilim (özellikle fizik), felsefe (din, bilim, ontoloji) ve tarih üzerine araştırıp yazıyorum. Yazılarım “ufens” adıyla Evrim Ağacı, Academia ve kendi bloglarımda yayımlandı; hepsini burada, Yazılar bölümünde de okuyabilirsiniz.",
+    "more": "Daha fazlası",
+    "toProjects": "Projelere göz atın",
+    "toBlog": "Yazıları okuyun",
+    "toContact": "İletişime geçin"
+  },
+  "contact": {
+    "title": "İletişim",
+    "description": "Emirhan Durmuşkaya’ya e-posta veya sosyal bağlantılar üzerinden ulaşın.",
+    "intro": "En kolay yol e-posta.",
+    "email": "E-posta",
+    "elsewhere": "Diğer bağlantılar"
+  },
+  "resume": {
+    "title": "Özgeçmiş",
+    "description": "Emirhan Durmuşkaya’nın özgeçmişi: girişimcilik, robotik ve yazı.",
+    "download": "PDF olarak indir",
+    "summary": "Özet",
+    "experience": "Deneyim",
+    "robotics": "Robotik",
+    "writing": "Yazı",
+    "skills": "Beceriler",
+    "links": "Bağlantılar",
+    "contact": "İletişim"
   },
   "blog": {
     "title": "Yazılar",

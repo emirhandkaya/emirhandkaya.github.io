@@ -88,6 +88,7 @@ Source keys:
 - Fetch budget: pass 1 used 6; pass 2 used 6 (site, FIRST awards, FRCTR, Valmeto about, evrimagaci/yazilar, plus search-only calls). Total about 12 of 15.
 
 ## Browser pass (2026-11-07, in-app browser)
+
 - "ufens" = Emirhan Durmuşkaya: the Evrim Ağacı profile @ufens shows the name "Emirhan Durmuşkaya" — https://evrimagaci.org/ufens — high
 - Academia profile "ufens" shows the name "Emirhan Durmuşkaya", with 3 papers — https://independent.academia.edu/ufens — high
 - Self-described interests: science (especially physics), philosophy (religion, science, ontology), history; researches and writes on them — https://evrimagaci.org/ufens/blog (About) — high
@@ -96,6 +97,7 @@ Source keys:
 - An ORCID iD is listed on his Evrim Ağacı profile (value not copied; ask before use) — medium
 
 ### Flagged — needs approval (from the Evrim Ağacı About panel)
+
 - Birth date, age and school grade are shown there — sensitive, do not use (values deliberately not recorded here)
 - City of residence (İstanbul) — ask
 - Second email address (not the public contact email) — do not use
@@ -103,7 +105,12 @@ Source keys:
 - ORCID iD — ask
 
 ## Owner decisions (2026-11-07, from Emirhan in chat)
+
 - APPROVED for use: city (İstanbul); school name (Halil Bekmezci Anadolu Lisesi, FRC 10141 Turing Robotics); Instagram + Medium links; ORCID iD.
 - NOT approved: birth date / age, second email, Valmeto registered address. Public contact stays emirhandurmuskaya@gmail.com.
 - Houston: the team qualified for the FIRST Championship (Houston) but did not attend — source: owner — high. On the site, say "qualified", never "competed".
 - Lead achievement: İstanbul Regional "Regional Winners" (cite the FIRST listing in the notes above).
+- Approved values (owner, in chat; recorded in stage 3 M4 per plan.md):
+  - ORCID iD: 0000-0003-4183-3247 → https://orcid.org/0000-0003-4183-3247
+  - Instagram: ufens30 → https://www.instagram.com/ufens30/
+  - Medium: ufens → https://medium.com/@ufens

@@ -1,0 +1,182 @@
+---
+// Web resume (spec §2) from src/content/resume/{lang}.json. The PDF at /resume-{lang}.pdf
+// is printed from this page by scripts/resume-pdf.mjs (print styles in global.css).
+import { getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { EMAIL, SITE_URL } from '../../data/site';
+import { LANGS, t, type Lang } from '../../i18n';
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const entry = await getEntry('resume', lang);
+if (!entry) throw new Error(`resume: src/content/resume/${lang}.json missing`);
+const r = entry.data;
+const sections = [
+  { key: 'experience', items: r.experience },
+  { key: 'robotics', items: r.robotics },
+  { key: 'writing', items: r.writing },
+] as const;
+---
+
+<Base lang={lang} title={t(lang, 'resume.title')} description={t(lang, 'resume.description')} path="resume">
+  <article class="container resume">
+    <header class="head">
+      <div>
+        <h1>{t(lang, 'site.name')}</h1>
+        <p class="mono muted">{t(lang, 'home.role')}</p>
+        <p class="print-only mono">
+          {EMAIL} · {new URL(SITE_URL).hostname}
+        </p>
+      </div>
+      <a class="button button--primary no-print" href={`/resume-${lang}.pdf`} download>
+        {t(lang, 'resume.download')}
+      </a>
+    </header>
+
+    <section aria-labelledby="r-summary">
+      <h2 id="r-summary">{t(lang, 'resume.summary')}</h2>
+      <p>{r.summary}</p>
+    </section>
+
+    {sections.map((s) => (
+      <section aria-labelledby={`r-${s.key}`}>
+        <h2 id={`r-${s.key}`}>{t(lang, `resume.${s.key}`)}</h2>
+        <ul class="entries" role="list">
+          {s.items.map((item) => (
+            <li class="entry">
+              <div class="entry-head">
+                <h3>{item.url ? <a href={item.url}>{item.title}</a> : item.title}</h3>
+                {item.period && <p class="mono muted period">{item.period}</p>}
+              </div>
+              {item.org && <p class="org">{item.org}</p>}
+              {item.description && <p class="muted">{item.description}</p>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    <section aria-labelledby="r-skills">
+      <h2 id="r-skills">{t(lang, 'resume.skills')}</h2>
+      <ul class="skills" role="list">
+        {r.skills.map((s) => (
+          <li>{s}</li>
+        ))}
+      </ul>
+    </section>
+
+    <section aria-labelledby="r-links">
+      <h2 id="r-links">{t(lang, 'resume.links')}</h2>
+      <ul class="link-list" role="list">
+        <li>
+          <span class="mono muted">{t(lang, 'resume.contact')}</span>
+          <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        </li>
+        {r.links.map((l) => (
+          <li>
+            <span class="mono muted">{l.label}</span>
+            <a href={l.url}>{l.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .resume {
+    display: grid;
+    gap: var(--space-7);
+    padding-block-start: var(--space-7);
+    max-width: var(--maxw);
+  }
+  .resume > * {
+    max-width: var(--measure);
+  }
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+  .head h1 {
+    font-size: var(--step-4);
+  }
+  section {
+    display: grid;
+    gap: var(--space-4);
+  }
+  section h2 {
+    font-size: var(--step-1);
+    font-family: var(--font-mono);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-mono);
+    color: var(--accent);
+    padding-block-end: var(--space-2);
+    border-block-end: var(--border-w) solid var(--border);
+  }
+  .entries {
+    display: grid;
+    gap: var(--space-5);
+    list-style: none;
+    padding: 0;
+  }
+  .entry {
+    display: grid;
+    gap: var(--space-1);
+  }
+  .entry-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-1) var(--space-3);
+  }
+  .entry h3 {
+    font-size: var(--step-0);
+    letter-spacing: normal;
+  }
+  .entry h3 a {
+    color: var(--text);
+  }
+  .period {
+    font-size: var(--step--1);
+  }
+  .org {
+    font-weight: var(--weight-medium);
+  }
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+    padding: 0;
+  }
+  .skills li {
+    padding: var(--space-1) var(--space-3);
+    border: var(--border-w) solid var(--border);
+    border-radius: var(--radius-pill);
+    font-size: var(--step--1);
+  }
+  .link-list {
+    display: grid;
+    gap: var(--space-2);
+    list-style: none;
+    padding: 0;
+  }
+  .link-list li {
+    display: grid;
+    grid-template-columns: minmax(0, var(--label-w)) minmax(0, 1fr);
+    gap: var(--space-3);
+    align-items: baseline;
+  }
+  .link-list .muted {
+    font-size: var(--step--1);
+  }
+  .link-list a {
+    overflow-wrap: anywhere;
+  }
+</style>

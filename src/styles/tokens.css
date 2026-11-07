@@ -53,6 +53,7 @@
   --target-min: 1.5rem;
   --maxw: 72rem;
   --measure: 68ch;
+  --label-w: 8rem;
   --gutter: var(--space-4);
 
   /* Glass */
@@ -69,6 +70,27 @@
 @media (min-width: 48rem) {
   :root {
     --gutter: var(--space-6);
+  }
+}
+
+/* Print (resume PDF): light palette, same token names, so components re-theme. */
+@media print {
+  :root {
+    color-scheme: light;
+    --bg: #ffffff;
+    --surface: transparent;
+    --surface-strong: transparent;
+    --border: rgb(0 0 0 / 0.18);
+    --text: #111418;
+    --text-muted: #474f58;
+    --accent: #006b7a;
+    --accent-ink: #ffffff;
+    --step-0: 10.5pt;
+    --step--1: 9pt;
+    --step-1: 12pt;
+    --step-4: 22pt;
+    --space-7: 1.25rem;
+    --leading: 1.45;
   }
 }
 

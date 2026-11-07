@@ -1,0 +1,64 @@
+{
+  "summary": "Entrepreneur based in İstanbul; founder of Valmeto (self-described) and member of the FRC #10141 Turing Robotics team. Researches and writes on science (especially physics), philosophy and history.",
+  "experience": [
+    {
+      "title": "Founder (self-described)",
+      "org": "Valmeto İç ve Dış Ticaret Ltd. Şti.",
+      "period": "TODO",
+      "description": "B2B international trading company supplying non-ferrous metals (copper, brass, bronze, aluminium; cable and wire). Europe-focused; sourcing, technical product support, export and logistics coordination.",
+      "url": "https://www.valmeto.com/"
+    }
+  ],
+  "robotics": [
+    {
+      "title": "Team member (role: TODO)",
+      "org": "Turing Robotics, FRC #10141 — Halil Bekmezci Anadolu Lisesi",
+      "period": "2025 –",
+      "description": "FIRST Robotics Competition team; rookie year 2025.",
+      "url": "https://frc-events.firstinspires.org/team/10141"
+    },
+    {
+      "title": "“Regional Winners” — 2026 İstanbul Regional",
+      "org": "FIRST Robotics Competition",
+      "period": "2026",
+      "description": "Team award; season game REBUILT presented by Haas.",
+      "url": "https://frc-events.firstinspires.org/2026/TUIS/awards"
+    },
+    {
+      "title": "Qualified for the FIRST Championship (Houston)",
+      "org": "FIRST Robotics Competition",
+      "period": "2026",
+      "description": "The team qualified for the FIRST Championship in Houston."
+    }
+  ],
+  "writing": [
+    {
+      "title": "Essays on Evrim Ağacı",
+      "org": "Evrim Ağacı (@ufens)",
+      "period": "2022 – 2023",
+      "description": "Essays on philosophy of religion, science, psychology and artificial intelligence; also published on his own Blogger and WordPress blogs.",
+      "url": "https://evrimagaci.org/ufens"
+    },
+    {
+      "title": "Papers on Academia",
+      "org": "Academia (ufens)",
+      "period": "2022 – 2025",
+      "description": "Three works, including “Why Was İskilipli Atıf Hanged?”.",
+      "url": "https://independent.academia.edu/ufens"
+    }
+  ],
+  "skills": [
+    "Entrepreneurship",
+    "International trade (non-ferrous metals)",
+    "Robotics (FRC)",
+    "Research and essay writing"
+  ],
+  "links": [
+    { "label": "GitHub", "url": "https://github.com/emirhandkaya" },
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/emirhan-durmuskaya-973546239/" },
+    { "label": "Evrim Ağacı", "url": "https://evrimagaci.org/ufens" },
+    { "label": "Academia", "url": "https://independent.academia.edu/ufens" },
+    { "label": "Medium", "url": "https://medium.com/@ufens" },
+    { "label": "ORCID", "url": "https://orcid.org/0000-0003-4183-3247" }
+  ]
+}

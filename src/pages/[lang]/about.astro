@@ -1,0 +1,71 @@
+---
+// Bio from research/profile-notes.md only (spec §2): Valmeto (self-described founder),
+// FRC 10141 Turing Robotics (Halil Bekmezci Anadolu Lisesi, approved), interests, İstanbul (approved).
+import Base from '../../layouts/Base.astro';
+import { LANGS, localizedPath, t, type Lang } from '../../i18n';
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+---
+
+<Base lang={lang} title={t(lang, 'about.title')} description={t(lang, 'about.description')} path="about">
+  <div class="container">
+    <header class="page-head">
+      <h1>{t(lang, 'about.title')}</h1>
+    </header>
+    <div class="prose bio">
+      <p class="lede">{t(lang, 'about.entrepreneur')}</p>
+      <p>{t(lang, 'about.robotics')}</p>
+      <p class="todo mono">{t(lang, 'about.roleTodo')}</p>
+      <p>{t(lang, 'about.writing')}</p>
+    </div>
+    <nav class="more" aria-labelledby="more">
+      <h2 id="more">{t(lang, 'about.more')}</h2>
+      <ul class="cluster" role="list">
+        <li>
+          <a class="button" href={localizedPath(lang, 'projects')}>
+            {t(lang, 'about.toProjects')}
+          </a>
+        </li>
+        <li>
+          <a class="button" href={localizedPath(lang, 'blog')}>
+            {t(lang, 'about.toBlog')}
+          </a>
+        </li>
+        <li>
+          <a class="button" href={localizedPath(lang, 'contact')}>
+            {t(lang, 'about.toContact')}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</Base>
+
+<style>
+  .lede {
+    font-size: var(--step-1);
+  }
+  .todo {
+    font-size: var(--step--1);
+    color: var(--text-muted);
+    border: var(--border-w) dashed var(--border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-2) var(--space-3);
+  }
+  .more {
+    margin-block-start: var(--space-7);
+    display: grid;
+    gap: var(--space-4);
+  }
+  .more h2 {
+    font-size: var(--step-1);
+  }
+  .more ul {
+    list-style: none;
+    padding: 0;
+  }
+</style>

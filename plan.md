@@ -48,6 +48,7 @@ Stages 0–1 produced the scaffold (Astro 7 minimal + MDX + sitemap + RSS, repor
 - `scripts/resume-pdf.mjs` + `npm run resume-pdf`; generate the PDFs; `public/og-default.png`, `public/robots.txt`.
 - Add the ORCID (0000-0003-4183-3247), Instagram (ufens30) and Medium (ufens) values to profile-notes "Owner decisions" in this commit (approved in chat).
 - Proof: all spec §2 routes exist for both locales.
+- As built (departures): the OG card is rendered from an HTML page that uses tokens.css and the self-hosted fonts (`scripts/og-image.mjs`, `npm run og-image`), not from an SVG, so no colors are duplicated. `npm run resume-pdf` builds, prints the PDFs from a tiny built-in static server over dist/, then rebuilds so dist/ has them. A shared `scripts/lib/chrome.mjs` finds Chrome/Edge (or `CHROME_PATH`). Print styles come from a print palette in tokens.css (same token names) plus `@media print` rules in global.css. Footer and Contact now include Instagram and ORCID, from `src/data/site.ts`. `npm run i18n-parity` now also compares the key structure of `src/content/<c>/{tr,en}.json` (the resume). Visible TODOs: Valmeto period and team role on Resume, team role on About. Checked in the browser pane: the switcher keeps the page and stores `lang`, the root gate honours it, and the home, resume, contact and about pages have no horizontal scroll at 375px.
 
 **M5 — Polish to criteria**
 

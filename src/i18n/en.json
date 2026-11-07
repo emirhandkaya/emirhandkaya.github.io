@@ -33,7 +33,55 @@
     "linkedin": "LinkedIn",
     "evrimagaci": "Evrim Ağacı",
     "academia": "Academia",
-    "medium": "Medium"
+    "medium": "Medium",
+    "instagram": "Instagram",
+    "orcid": "ORCID"
+  },
+  "home": {
+    "role": "Entrepreneur · Founder of Valmeto · Turing Robotics",
+    "intro": "Based in İstanbul. Member of the FRC #10141 Turing Robotics team; writes on science, philosophy and history.",
+    "ctaProjects": "Projects",
+    "ctaResume": "Resume",
+    "highlights": "Highlights",
+    "highlightWin": "“Regional Winners” — 2026 İstanbul Regional",
+    "highlightWinSub": "Turing Robotics, FRC #10141",
+    "highlightQualified": "Qualified for the FIRST Championship (Houston)",
+    "highlightQualifiedSub": "2026 season",
+    "featured": "Featured projects",
+    "latest": "Latest writing",
+    "seeAllProjects": "All projects",
+    "seeAllPosts": "All posts"
+  },
+  "about": {
+    "title": "About",
+    "description": "Emirhan Durmuşkaya: entrepreneur in İstanbul, member of FRC Turing Robotics, and writer.",
+    "entrepreneur": "I am an entrepreneur based in İstanbul. I founded Valmeto, a B2B international trading company that supplies non-ferrous metals.",
+    "robotics": "I am a member of Turing Robotics (FRC #10141), the FIRST Robotics Competition team of Halil Bekmezci Anadolu Lisesi. The team won “Regional Winners” at the 2026 İstanbul Regional and qualified for the FIRST Championship in Houston.",
+    "roleTodo": "My role on the team: TODO",
+    "writing": "I research and write on science (especially physics), philosophy (religion, science, ontology) and history. My essays have been published as “ufens” on Evrim Ağacı, Academia and my own blogs; you can read all of them here, in the Writing section.",
+    "more": "More",
+    "toProjects": "Browse the projects",
+    "toBlog": "Read the writing",
+    "toContact": "Get in touch"
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "Reach Emirhan Durmuşkaya by email or through his social links.",
+    "intro": "Email is the easiest way.",
+    "email": "Email",
+    "elsewhere": "Elsewhere"
+  },
+  "resume": {
+    "title": "Resume",
+    "description": "Resume of Emirhan Durmuşkaya: entrepreneurship, robotics and writing.",
+    "download": "Download PDF",
+    "summary": "Summary",
+    "experience": "Experience",
+    "robotics": "Robotics",
+    "writing": "Writing",
+    "skills": "Skills",
+    "links": "Links",
+    "contact": "Contact"
   },
   "blog": {
     "title": "Writing",

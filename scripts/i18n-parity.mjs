@@ -34,7 +34,8 @@ compare('ui key', ui);
 
 // 2. Pages: src/pages/{tr,en}/**
 const pages = {};
-for (const l of LANGS) pages[l] = files(`src/pages/${l}`).map((f) => relative(`src/pages/${l}`, f).replace(/\\/g, '/'));
+for (const l of LANGS)
+  pages[l] = files(`src/pages/${l}`).map((f) => relative(`src/pages/${l}`, f).replace(/\\/g, '/'));
 compare('page', pages);
 
 // 3. Content: src/content/<collection>/{tr,en}/** (translations share a slug)
@@ -43,8 +44,20 @@ if (existsSync('src/content')) {
     const base = join('src/content', c);
     if (!statSync(base).isDirectory()) continue;
     const entries = {};
-    for (const l of LANGS) entries[l] = files(join(base, l)).map((f) => relative(join(base, l), f).replace(/\\/g, '/'));
+    for (const l of LANGS)
+      entries[l] = files(join(base, l)).map((f) => relative(join(base, l), f).replace(/\\/g, '/'));
     compare(`content/${c}`, entries);
+
+    // Data collections stored as src/content/<c>/{tr,en}.json (e.g. resume): same file, same key structure.
+    const data = Object.fromEntries(LANGS.map((l) => [l, join(base, `${l}.json`)]));
+    if (LANGS.some((l) => existsSync(data[l]))) {
+      const keys = {};
+      for (const l of LANGS) {
+        if (!existsSync(data[l])) problems.push(`content/${c}: ${l}.json not found`);
+        keys[l] = existsSync(data[l]) ? flatKeys(JSON.parse(readFileSync(data[l], 'utf8'))) : [];
+      }
+      compare(`content/${c} key`, keys);
+    }
   }
 }
 

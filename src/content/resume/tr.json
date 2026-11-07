@@ -1,0 +1,64 @@
+{
+  "summary": "İstanbul’da yaşayan girişimci; Valmeto’nun kurucusu (kendi ifadesiyle) ve FRC #10141 Turing Robotics takımının üyesi. Bilim (özellikle fizik), felsefe ve tarih üzerine araştırıp yazıyor.",
+  "experience": [
+    {
+      "title": "Kurucu (kendi ifadesiyle)",
+      "org": "Valmeto İç ve Dış Ticaret Ltd. Şti.",
+      "period": "TODO",
+      "description": "Demir dışı metaller (bakır, pirinç, bronz, alüminyum; kablo ve tel) tedarik eden B2B uluslararası ticaret şirketi. Avrupa odaklı; tedarik, teknik ürün desteği, ihracat ve lojistik koordinasyonu.",
+      "url": "https://www.valmeto.com/"
+    }
+  ],
+  "robotics": [
+    {
+      "title": "Takım üyesi (rol: TODO)",
+      "org": "Turing Robotics, FRC #10141 — Halil Bekmezci Anadolu Lisesi",
+      "period": "2025 –",
+      "description": "FIRST Robotics Competition takımı; ilk sezonu 2025.",
+      "url": "https://frc-events.firstinspires.org/team/10141"
+    },
+    {
+      "title": "“Regional Winners” — 2026 İstanbul Regional",
+      "org": "FIRST Robotics Competition",
+      "period": "2026",
+      "description": "Takım ödülü; sezon oyunu REBUILT presented by Haas.",
+      "url": "https://frc-events.firstinspires.org/2026/TUIS/awards"
+    },
+    {
+      "title": "FIRST Championship (Houston) katılım hakkı",
+      "org": "FIRST Robotics Competition",
+      "period": "2026",
+      "description": "Takım, Houston’daki FIRST Championship’e katılma hakkı kazandı."
+    }
+  ],
+  "writing": [
+    {
+      "title": "Evrim Ağacı yazıları",
+      "org": "Evrim Ağacı (@ufens)",
+      "period": "2022 – 2023",
+      "description": "Din felsefesi, bilim, psikoloji ve yapay zeka üzerine yazılar; kişisel Blogger ve WordPress bloglarında da yayımlandı.",
+      "url": "https://evrimagaci.org/ufens"
+    },
+    {
+      "title": "Academia çalışmaları",
+      "org": "Academia (ufens)",
+      "period": "2022 – 2025",
+      "description": "Aralarında “İskilipli Atıf Neden Asıldı?” bulunan üç çalışma.",
+      "url": "https://independent.academia.edu/ufens"
+    }
+  ],
+  "skills": [
+    "Girişimcilik",
+    "Uluslararası ticaret (demir dışı metaller)",
+    "Robotik (FRC)",
+    "Araştırma ve deneme yazımı"
+  ],
+  "links": [
+    { "label": "GitHub", "url": "https://github.com/emirhandkaya" },
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/emirhan-durmuskaya-973546239/" },
+    { "label": "Evrim Ağacı", "url": "https://evrimagaci.org/ufens" },
+    { "label": "Academia", "url": "https://independent.academia.edu/ufens" },
+    { "label": "Medium", "url": "https://medium.com/@ufens" },
+    { "label": "ORCID", "url": "https://orcid.org/0000-0003-4183-3247" }
+  ]
+}
