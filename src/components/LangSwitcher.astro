@@ -18,7 +18,7 @@ const { lang, paths } = Astro.props;
           href={localizedPath(l, paths[l])}
           hreflang={l}
           lang={l}
-          aria-label={t(l, `lang.${l}`)}
+          aria-label={`${l.toUpperCase()} — ${t(l, `lang.${l}`)}`}
           aria-current={l === lang ? 'true' : undefined}
           data-lang-link={l}
         >

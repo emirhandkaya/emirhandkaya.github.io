@@ -2,7 +2,7 @@
 // Run via `npm run resume-pdf` (builds first, then rebuilds so dist/ has the PDFs).
 import { createReadStream, existsSync, statSync } from 'node:fs';
 import { createServer } from 'node:http';
-import { extname, join, normalize, resolve } from 'node:path';
+import { extname, join, normalize, resolve, sep } from 'node:path';
 import puppeteer from 'puppeteer-core';
 import { findChrome } from './lib/chrome.mjs';
 
@@ -27,9 +27,14 @@ if (!existsSync(join(DIST, 'tr', 'resume', 'index.html'))) {
 
 // Minimal static server for dist/ (no extra dependency).
 const server = createServer((req, res) => {
-  const path = decodeURIComponent(new URL(req.url ?? '/', 'http://x').pathname);
+  let path;
+  try {
+    path = decodeURIComponent(new URL(req.url ?? '/', 'http://x').pathname);
+  } catch {
+    return res.writeHead(400).end();
+  }
   let file = normalize(join(DIST, path));
-  if (!file.startsWith(DIST)) return res.writeHead(403).end();
+  if (file !== DIST && !file.startsWith(DIST + sep)) return res.writeHead(403).end();
   if (existsSync(file) && statSync(file).isDirectory()) file = join(file, 'index.html');
   if (!existsSync(file)) return res.writeHead(404).end();
   res.writeHead(200, { 'content-type': TYPES[extname(file)] ?? 'application/octet-stream' });

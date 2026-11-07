@@ -3,21 +3,25 @@ import Base from '../../../../layouts/Base.astro';
 import PostCard from '../../../../components/PostCard.astro';
 import { LANGS, localizedPath, t, tn, type Lang } from '../../../../i18n';
 import { getPosts, tagsOf } from '../../../../lib/posts';
+import { tagSlug } from '../../../../lib/tags';
 
 export async function getStaticPaths() {
   const paths = [];
   for (const lang of LANGS) {
     const posts = await getPosts(lang);
     for (const tag of tagsOf(posts, lang)) {
-      paths.push({ params: { lang, tag }, props: { posts: posts.filter((p) => p.data.tags.includes(tag)) } });
+      paths.push({
+        params: { lang, tag: tagSlug(tag) },
+        props: { tag, posts: posts.filter((p) => p.data.tags.includes(tag)) },
+      });
     }
   }
   return paths;
 }
 
 const lang = Astro.params.lang as Lang;
-const tag = Astro.params.tag as string;
-const { posts } = Astro.props;
+const { tag, posts } = Astro.props;
+const slug = tagSlug(tag);
 // Tags differ per language, so the other-language link falls back to its blog index.
 ---
 
@@ -25,7 +29,7 @@ const { posts } = Astro.props;
   lang={lang}
   title={t(lang, 'blog.taggedTitle', { tag })}
   description={t(lang, 'blog.taggedDescription', { tag })}
-  path={`blog/tags/${tag}`}
+  path={`blog/tags/${slug}`}
   altPath="blog"
 >
   <div class="container">

@@ -48,6 +48,8 @@ const source = d.canonicalUrl ? t(lang, `sources.${sourceKey(d.canonicalUrl)}`) 
 const abstractOnly =
   d.translationStatus === 'partial' && d.canonicalUrl && sourceKey(d.canonicalUrl) === 'academia';
 
+const hasNotes = Boolean(d.translatedFrom || d.canonicalUrl || d.mirrors?.length);
+
 const site = Astro.site ?? new URL(Astro.url.origin);
 const selfUrl = new URL(localizedPath(lang, `blog/${slug}`), site).href;
 const jsonLd = {
@@ -86,44 +88,46 @@ const jsonLd = {
       <TagList lang={lang} tags={d.tags} />
     </header>
 
-    <aside class="notes card" aria-label={t(lang, 'blog.readOriginal')}>
-      {d.translatedFrom && (
-        <p>
-          {t(lang, `blog.translatedFrom.${d.translatedFrom}`)}{' '}
-          <a href={localizedPath(d.translatedFrom, `blog/${slug}`)} hreflang={d.translatedFrom}>
-            {t(lang, 'blog.readTranslationSource')}
-          </a>
-        </p>
-      )}
-      {d.translatedFrom && d.translationStatus !== 'done' && (
-        <p class="muted">
-          {t(lang, d.translationStatus === 'needed' ? 'blog.translationNeeded' : 'blog.translationPartial')}
-        </p>
-      )}
-      {d.canonicalUrl && source && (
-        <p>
-          {t(lang, 'blog.originallyPublished', { site: source })}{' '}
-          <a href={d.canonicalUrl} rel="noopener" target="_blank">
-            {t(lang, 'blog.readOriginal')}
-            <span class="visually-hidden">{t(lang, 'a11y.newTab')}</span>
-          </a>
-        </p>
-      )}
-      {d.mirrors && d.mirrors.length > 0 && (
-        <p class="muted">
-          {t(lang, 'blog.alsoOn')}{' '}
-          {d.mirrors.map((url, i) => (
-            <>
-              {i > 0 && ', '}
-              <a href={url} rel="noopener" target="_blank">
-                {t(lang, `sources.${sourceKey(url)}`)}
-                <span class="visually-hidden">{t(lang, 'a11y.newTab')}</span>
-              </a>
-            </>
-          ))}
-        </p>
-      )}
-    </aside>
+    {hasNotes && (
+      <aside class="notes card" aria-label={t(lang, 'blog.aboutPost')}>
+        {d.translatedFrom && (
+          <p>
+            {t(lang, `blog.translatedFrom.${d.translatedFrom}`)}{' '}
+            <a href={localizedPath(d.translatedFrom, `blog/${slug}`)} hreflang={d.translatedFrom}>
+              {t(lang, 'blog.readTranslationSource')}
+            </a>
+          </p>
+        )}
+        {d.translatedFrom && d.translationStatus !== 'done' && (
+          <p class="muted">
+            {t(lang, d.translationStatus === 'needed' ? 'blog.translationNeeded' : 'blog.translationPartial')}
+          </p>
+        )}
+        {d.canonicalUrl && source && (
+          <p>
+            {t(lang, 'blog.originallyPublished', { site: source })}{' '}
+            <a href={d.canonicalUrl} rel="noopener" target="_blank">
+              {t(lang, 'blog.readOriginal')}
+              <span class="visually-hidden">{t(lang, 'a11y.newTab')}</span>
+            </a>
+          </p>
+        )}
+        {d.mirrors && d.mirrors.length > 0 && (
+          <p class="muted">
+            {t(lang, 'blog.alsoOn')}{' '}
+            {d.mirrors.map((url, i) => (
+              <>
+                {i > 0 && ', '}
+                <a href={url} rel="noopener" target="_blank">
+                  {t(lang, `sources.${sourceKey(url)}`)}
+                  <span class="visually-hidden">{t(lang, 'a11y.newTab')}</span>
+                </a>
+              </>
+            ))}
+          </p>
+        )}
+      </aside>
+    )}
 
     <div class="prose">
       <Content />
@@ -178,9 +182,6 @@ const jsonLd = {
     gap: var(--space-2);
     font-size: var(--step--1);
     padding: var(--space-4);
-  }
-  .notes:empty {
-    display: none;
   }
   .pager {
     display: grid;

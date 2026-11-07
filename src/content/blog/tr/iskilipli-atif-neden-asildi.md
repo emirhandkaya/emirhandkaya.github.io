@@ -2,7 +2,7 @@
 title: 'İskilipli Atıf Neden Asıldı?'
 date: 2025-01-01
 lang: tr
-tags: [tarih, osmanli-tarihi, turk-tarihi]
+tags: [tarih, osmanlı-tarihi, türk-tarihi]
 canonicalUrl: https://www.academia.edu/142939782/%C4%B0skilipli_At%C4%B1f_Neden_As%C4%B1ld%C4%B1
 translationStatus: partial
 ---

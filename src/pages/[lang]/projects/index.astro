@@ -4,6 +4,7 @@ import ProjectCard from '../../../components/ProjectCard.astro';
 import TagFilter from '../../../components/TagFilter.astro';
 import { LANGS, t, tn, type Lang } from '../../../i18n';
 import { getProjects, projectTags } from '../../../lib/projects';
+import { tagSlug } from '../../../lib/tags';
 
 export function getStaticPaths() {
   return LANGS.map((lang) => ({ params: { lang } }));
@@ -29,7 +30,7 @@ const tags = projectTags(projects);
     <TagFilter lang={lang} tags={tags} />
     <ul class="grid" role="list">
       {projects.map((project) => (
-        <li data-tags={project.data.tags.join(' ')}>
+        <li data-tags={project.data.tags.map(tagSlug).join(' ')}>
           <ProjectCard project={project} lang={lang} />
         </li>
       ))}

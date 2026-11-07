@@ -10,12 +10,15 @@ export function getStaticPaths() {
 export const GET: APIRoute = async ({ params, site }) => {
   const lang = params.lang as Lang;
   const posts = await getPosts(lang);
+  const base = site ?? 'https://emirhandkaya.github.io';
+  const self = new URL(`${localizedPath(lang)}rss.xml`, base).href;
   return rss({
     title: t(lang, 'rss.title'),
     description: t(lang, 'rss.description'),
-    site: new URL(localizedPath(lang), site ?? 'https://emirhandkaya.github.io').href,
+    site: new URL(localizedPath(lang), base).href,
     trailingSlash: true,
-    customData: `<language>${LOCALES[lang].bcp47.toLowerCase()}</language>`,
+    xmlns: { atom: 'http://www.w3.org/2005/Atom' },
+    customData: `<language>${LOCALES[lang].bcp47.toLowerCase()}</language><atom:link href="${self}" rel="self" type="application/rss+xml"/>`,
     items: posts.map((post) => ({
       title: post.data.title,
       description: describe(post),

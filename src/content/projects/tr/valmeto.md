@@ -3,7 +3,7 @@
 title: 'Valmeto'
 summary: 'Demir dışı metaller (bakır, pirinç, bronz, alüminyum) tedarik eden B2B uluslararası ticaret şirketi.'
 lang: tr
-tags: [girisimcilik, uluslararasi-ticaret]
+tags: [girişimcilik, uluslararası-ticaret]
 role: 'Kurucu (kendi ifadesiyle)'
 status: active
 featured: true

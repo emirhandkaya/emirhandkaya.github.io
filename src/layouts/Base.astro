@@ -7,7 +7,7 @@ import '../styles/global.css';
 import Seo from '../components/Seo.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { otherLang, t, type Lang } from '../i18n';
+import { localizedPath, otherLang, t, type Lang } from '../i18n';
 
 export interface Props {
   lang: Lang;
@@ -37,6 +37,12 @@ const paths = { [lang]: path, [otherLang(lang)]: altPath ?? path } as Record<Lan
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={t(lang, 'rss.title')}
+      href={`${localizedPath(lang)}rss.xml`}
+    />
     <Seo
       lang={lang}
       title={title}

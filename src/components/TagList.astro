@@ -1,5 +1,6 @@
 ---
 import { localizedPath, t, type Lang } from '../i18n';
+import { tagSlug } from '../lib/tags';
 
 export interface Props {
   lang: Lang;
@@ -15,7 +16,10 @@ const { lang, tags, current } = Astro.props;
   <ul class="tags" role="list" aria-label={t(lang, 'blog.tags')}>
     {tags.map((tag) => (
       <li>
-        <a href={localizedPath(lang, `blog/tags/${tag}`)} aria-current={tag === current ? 'page' : undefined}>
+        <a
+          href={localizedPath(lang, `blog/tags/${tagSlug(tag)}`)}
+          aria-current={tag === current ? 'page' : undefined}
+        >
           #{tag}
         </a>
       </li>

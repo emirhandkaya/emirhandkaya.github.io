@@ -1,4 +1,5 @@
-// Fails if any UI key, page, or content entry exists in one language but not the other.
+// Fails if any UI key, page, or content entry exists in one language but not the other,
+// or if translations of an entry disagree on shared frontmatter (date, canonicalUrl, …).
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
@@ -32,11 +33,31 @@ for (const l of LANGS) {
 }
 compare('ui key', ui);
 
-// 2. Pages: src/pages/{tr,en}/**
-const pages = {};
+// 2. Pages: localized pages live once in src/pages/[lang]/ and must build for every locale,
+//    i.e. their getStaticPaths iterates LANGS. (Built-page parity in dist/ is checked by guard.mjs.)
+for (const f of files('src/pages/[lang]').filter((p) => /\.(astro|ts|md|mdx)$/.test(p))) {
+  const src = readFileSync(f, 'utf8');
+  if (!/getStaticPaths/.test(src) || !/\bLANGS\b/.test(src))
+    problems.push(
+      `page: ${f.replace(/\\/g, '/')} does not build for every locale (getStaticPaths over LANGS)`,
+    );
+}
 for (const l of LANGS)
-  pages[l] = files(`src/pages/${l}`).map((f) => relative(`src/pages/${l}`, f).replace(/\\/g, '/'));
-compare('page', pages);
+  if (existsSync(`src/pages/${l}`))
+    problems.push(`page: src/pages/${l}/ exists; put localized pages in src/pages/[lang]/`);
+
+// Frontmatter fields that must be identical in both languages of an entry.
+const SHARED = ['date', 'updated', 'canonicalUrl', 'status', 'featured', 'order', 'draft'];
+function frontmatter(p) {
+  const m = readFileSync(p, 'utf8').match(/^---\r?\n([\s\S]*?)\r?\n---/);
+  const out = {};
+  if (!m) return out;
+  for (const line of m[1].split(/\r?\n/)) {
+    const kv = line.match(/^(\w+):\s*(.*?)\s*(?:#.*)?$/);
+    if (kv) out[kv[1]] = kv[2].replace(/^['"]|['"]$/g, '');
+  }
+  return out;
+}
 
 // 3. Content: src/content/<collection>/{tr,en}/** (translations share a slug)
 if (existsSync('src/content')) {
@@ -47,6 +68,14 @@ if (existsSync('src/content')) {
     for (const l of LANGS)
       entries[l] = files(join(base, l)).map((f) => relative(join(base, l), f).replace(/\\/g, '/'));
     compare(`content/${c}`, entries);
+
+    // Translations of the same entry share date, canonical URL, status, order, etc.
+    for (const rel of entries.tr.filter((e) => /\.mdx?$/.test(e) && entries.en.includes(e))) {
+      const [a, b] = LANGS.map((l) => frontmatter(join(base, l, rel)));
+      for (const k of SHARED)
+        if ((a[k] ?? '') !== (b[k] ?? ''))
+          problems.push(`content/${c}/${rel}: "${k}" differs (tr "${a[k] ?? ''}" vs en "${b[k] ?? ''}")`);
+    }
 
     // Data collections stored as src/content/<c>/{tr,en}.json (e.g. resume): same file, same key structure.
     const data = Object.fromEntries(LANGS.map((l) => [l, join(base, `${l}.json`)]));

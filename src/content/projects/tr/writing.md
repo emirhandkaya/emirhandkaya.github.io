@@ -4,7 +4,7 @@ title: 'Yazılar ve denemeler'
 summary: 'Bilim, felsefe ve tarih üzerine Evrim Ağacı, Academia ve kişisel bloglarda yayımlanan altı yazı.'
 lang: tr
 date: 2022-11-05 # earliest of the 6 works
-tags: [yazi, felsefe, bilim, tarih]
+tags: [yazı, felsefe, bilim, tarih]
 status: active
 featured: true
 order: 3
@@ -29,4 +29,4 @@ Yazılarını "ufens" adıyla Evrim Ağacı’nda, kendi Blogger ve WordPress bl
 
 ## Sonuç
 
-Kasım 2022 ile 2025 arasında altı yazı. Hepsi bu sitenin [Yazılar](/tr/blog/) bölümünde Türkçe ve İngilizce olarak okunabilir.
+Kasım 2022 ile 2025 arasında altı yazı. Hepsi bu sitenin [Yazılar](/tr/blog/) bölümünde Türkçe ve İngilizce olarak yer alıyor; “İskilipli Atıf Neden Asıldı?” için özet ve Academia’daki tam metne bağlantı var.

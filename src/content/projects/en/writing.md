@@ -29,4 +29,4 @@ He publishes his essays as "ufens" on Evrim Ağacı, on his own Blogger and Word
 
 ## Result
 
-Six essays between November 2022 and 2025. All of them can be read in Turkish and English in the [Writing](/en/blog/) section of this site.
+Six essays between November 2022 and 2025. All of them are in the [Writing](/en/blog/) section of this site, in Turkish and English; for “Why Was İskilipli Atıf Hanged?” there is the abstract and a link to the full paper on Academia.

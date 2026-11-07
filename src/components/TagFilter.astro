@@ -3,6 +3,7 @@
 // Items to filter carry data-tags="a b c". One tag at a time; pressing it again shows all.
 // State is mirrored to ?tag=.
 import { t, tn, type Lang } from '../i18n';
+import { tagSlug } from '../lib/tags';
 
 export interface Props {
   lang: Lang;
@@ -27,7 +28,7 @@ const { lang, tags } = Astro.props;
       {t(lang, 'projects.all')}
     </button>
     {tags.map((tag) => (
-      <button type="button" data-tag={tag} aria-pressed="false">
+      <button type="button" data-tag={tagSlug(tag)} aria-pressed="false">
         #{tag}
       </button>
     ))}

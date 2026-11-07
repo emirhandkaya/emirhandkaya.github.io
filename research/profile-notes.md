@@ -94,6 +94,7 @@ Source keys:
 - Self-described interests: science (especially physics), philosophy (religion, science, ontology), history; researches and writes on them — https://evrimagaci.org/ufens/blog (About) — high
 - Own blogs linked from his Evrim Ağacı profile: https://ufenss.blogspot.com, https://ufensblog.wordpress.com, Medium "ufens" — high
 - 6 unique works (2022-11 → 2025), cross-posted across Evrim Ağacı, Blogger, WordPress and Academia; stubs are in research/posts/tr/ — high
+  - Of these, the Evrim Ağacı ones are dated 2022-11 to 2023-04 (agnostisizm 2022-11-13, din-ve-bilim 2023-01-07, odaklanma 2023-02-26, yapay-zeka 2023-04-15; canonical URLs on evrimagaci.org in the imported posts, now src/content/blog/tr/) — high
 - An ORCID iD is listed on his Evrim Ağacı profile (value not copied; ask before use) — medium
 
 ### Flagged — needs approval (from the Evrim Ağacı About panel)
