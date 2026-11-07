@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config — spec.md §1
 export default defineConfig({
-  site: 'https://emirhandkaya.github.io',
+  site: 'https://emirhandurmuskaya.com',
   base: '/',
   output: 'static',
   trailingSlash: 'always',
@@ -19,7 +19,7 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
-      filter: (page) => !/\/404\/?$/.test(page) && page !== 'https://emirhandkaya.github.io/',
+      filter: (page) => !/\/404\/?$/.test(page) && page !== 'https://emirhandurmuskaya.com/',
       i18n: { defaultLocale: 'tr', locales: { tr: 'tr-TR', en: 'en-US' } },
     }),
   ],

@@ -1,4 +1,4 @@
-# emirhandkaya.github.io
+# emirhandurmuskaya.com
 
 Personal site of Emirhan Durmuşkaya: portfolio, blog and resume in Turkish and English. Built with Astro (static output), Markdown content collections and plain CSS.
 

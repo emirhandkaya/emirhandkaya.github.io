@@ -1,7 +1,7 @@
 // Site-wide data. Every value here is sourced from research/profile-notes.md
 // (Links, Browser pass, and Owner decisions → Approved values).
 
-export const SITE_URL = 'https://emirhandkaya.github.io';
+export const SITE_URL = 'https://emirhandurmuskaya.com';
 
 // profile-notes: Owner decisions — public contact email.
 export const EMAIL = 'emirhandurmuskaya@gmail.com';

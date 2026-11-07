@@ -10,7 +10,7 @@ export function getStaticPaths() {
 export const GET: APIRoute = async ({ params, site }) => {
   const lang = params.lang as Lang;
   const posts = await getPosts(lang);
-  const base = site ?? 'https://emirhandkaya.github.io';
+  const base = site ?? 'https://emirhandurmuskaya.com';
   const self = new URL(`${localizedPath(lang)}rss.xml`, base).href;
   return rss({
     title: t(lang, 'rss.title'),

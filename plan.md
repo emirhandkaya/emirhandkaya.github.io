@@ -6,7 +6,7 @@ Stages 0–1 produced the scaffold (Astro 7 minimal + MDX + sitemap + RSS, repor
 
 ## Decisions (resolving the intent.md open questions)
 
-- Hosting: GitHub Pages, repo `emirhandkaya/emirhandkaya.github.io`, GitHub Actions deploy (prepared in stage 5, not pushed).
+- Hosting: GitHub Pages, repo `emirhandkaya/emirhandkaya.github.io`, GitHub Actions deploy, custom domain `emirhandurmuskaya.com` (owner decision, 2026-11-07; `public/CNAME`).
 - Default language: TR; the root `/` gate per spec §2.
 - OG image: one typographic PNG generated from an SVG at build-prep time (no photo needed).
 - Resume PDF: generated from `/{lang}/resume/` with `puppeteer-core` + locally installed Chrome (`scripts/resume-pdf.mjs`) into `public/resume-{tr,en}.pdf`, committed. Rerun when the resume changes.

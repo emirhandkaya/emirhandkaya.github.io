@@ -1,10 +1,10 @@
-# Spec — emirhandkaya.github.io
+# Spec — emirhandurmuskaya.com
 
 Inputs: intent.md, research/profile-notes.md (the only source of facts about Emirhan; unknown → `TODO`).
 
 ## 1. Site & hosting
 
-- `site: https://emirhandkaya.github.io`, `base: /`, `output: 'static'`, `trailingSlash: 'always'`.
+- `site: https://emirhandurmuskaya.com`, `base: /`, `output: 'static'`, `trailingSlash: 'always'`.
 - Locales `tr` (default) and `en`; Astro i18n `routing.prefixDefaultLocale: true`, so every page lives under `/tr/` or `/en/`.
 
 ## 2. Pages (identical slugs in both locales)

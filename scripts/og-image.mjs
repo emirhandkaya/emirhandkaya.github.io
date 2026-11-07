@@ -31,7 +31,7 @@ ${css.map((c) => `<link rel="stylesheet" href="${href(c)}">`).join('\n')}
 </style></head><body><div class="frame">
   <div class="mark">ED</div>
   <div><h1>Emirhan Durmuşkaya</h1><p class="role">Valmeto · Turing Robotics · FRC #10141</p></div>
-  <div class="foot"><span>emirhandkaya.github.io</span><span>TR / EN</span></div>
+  <div class="foot"><span>emirhandurmuskaya.com</span><span>TR / EN</span></div>
 </div></body></html>`;
 
 const dir = mkdtempSync(join(tmpdir(), 'og-'));
