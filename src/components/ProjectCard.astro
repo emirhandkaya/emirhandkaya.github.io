@@ -15,7 +15,7 @@ const d = project.data;
 const href = localizedPath(lang, `projects/${slugOf(project)}`);
 ---
 
-<article class="card project-card">
+<article class="card card--link project-card">
   <p class="meta">
     {d.date && <span>{d.date.getUTCFullYear()}</span>}
     {d.date && <span aria-hidden="true">·</span>}

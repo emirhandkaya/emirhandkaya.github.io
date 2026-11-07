@@ -17,7 +17,7 @@ const Heading = `h${level}` as 'h2' | 'h3';
 const href = localizedPath(lang, `blog/${slugOf(post)}`);
 ---
 
-<article class="card post-card">
+<article class="card card--link post-card">
   <PostMeta lang={lang} date={post.data.date} minutes={readingTime(post.body ?? '')} />
   <Heading class="title">
     <a href={href}>{post.data.title}</a>

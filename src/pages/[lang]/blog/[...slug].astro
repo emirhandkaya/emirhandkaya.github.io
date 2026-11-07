@@ -141,13 +141,13 @@ const jsonLd = {
     {(newer || older) && (
       <nav class="pager" aria-label={t(lang, 'blog.pager')}>
         {older && (
-          <a class="card prev" href={localizedPath(lang, `blog/${slugOf(older)}`)} rel="prev">
+          <a class="card card--link prev" href={localizedPath(lang, `blog/${slugOf(older)}`)} rel="prev">
             <span class="mono muted">← {t(lang, 'blog.prev')}</span>
             <span>{older.data.title}</span>
           </a>
         )}
         {newer && (
-          <a class="card next" href={localizedPath(lang, `blog/${slugOf(newer)}`)} rel="next">
+          <a class="card card--link next" href={localizedPath(lang, `blog/${slugOf(newer)}`)} rel="next">
             <span class="mono muted">{t(lang, 'blog.next')} →</span>
             <span>{newer.data.title}</span>
           </a>

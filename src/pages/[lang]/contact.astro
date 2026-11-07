@@ -34,7 +34,7 @@ const lang = Astro.params.lang as Lang;
       <ul class="links" role="list">
         {SOCIALS.map((s) => (
           <li>
-            <a class="card" href={s.url} rel="me noopener" target="_blank">
+            <a class="card card--link" href={s.url} rel="me noopener" target="_blank">
               <span>{t(lang, `social.${s.id}`)}</span>
               <span class="mono muted host">{new URL(s.url).hostname.replace(/^www\./, '')}</span>
               <span class="visually-hidden">{t(lang, 'a11y.newTab')}</span>

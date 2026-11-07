@@ -13,7 +13,7 @@ const current = stripLang(Astro.url.pathname);
 const isActive = (item: string) => current === `${item}/` || current.startsWith(`${item}/`);
 ---
 
-<header class="site-header">
+<header class="site-header glass">
   <div class="container bar">
     <a
       class="brand"
@@ -45,7 +45,17 @@ const isActive = (item: string) => current === `${item}/` || current.startsWith(
 
 <style>
   .site-header {
-    border-block-end: var(--border-w) solid var(--border);
+    position: relative;
+    z-index: 10;
+    border-inline: 0;
+    border-block-start: 0;
+  }
+  /* Sticky only when the header fits on one row, so it never eats a phone screen. */
+  @media (min-width: 60rem) {
+    .site-header {
+      position: sticky;
+      inset-block-start: 0;
+    }
   }
   .bar {
     display: flex;

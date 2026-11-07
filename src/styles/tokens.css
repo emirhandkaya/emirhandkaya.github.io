@@ -65,6 +65,10 @@
   --dur-fast: 120ms;
   --dur: 220ms;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur-reveal: 360ms;
+  --lift: -2px;
+  --reveal-shift: 6px;
+  --header-h: 4.5rem;
 }
 
 @media (min-width: 48rem) {
@@ -98,5 +102,8 @@
   :root {
     --dur-fast: 0ms;
     --dur: 0ms;
+    --dur-reveal: 0ms;
+    --lift: 0px;
+    --reveal-shift: 0px;
   }
 }
