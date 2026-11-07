@@ -23,6 +23,7 @@ Stages 0–1 produced the scaffold (Astro 7 minimal + MDX + sitemap + RSS, repor
 - `src/layouts/Base.astro` (head: SEO/OG/hreflang/canonical/JSON-LD slot, skip link, Header, Footer), `src/components/{Header,Footer,LangSwitcher,Seo}.astro`.
 - `src/pages/index.astro` → root gate; `src/pages/404.astro`.
 - Proof: build passes; `npm run check` passes.
+- As built (departures): Fontsource variable packages cannot import single subsets, so the default CSS is used; its `unicode-range` means browsers fetch only the subsets a page needs (latin/latin-ext for TR/EN). Footer socials are GitHub, LinkedIn, Evrim Ağacı, Academia and Medium; Instagram and ORCID join in M4 with their profile-notes entry. Social URLs live in `src/data/site.ts`, nav order there too. The sitemap warns "No pages found" until M2 adds locale pages (the gate and 404 are filtered out).
 
 **M2 — Content collections + blog**
 

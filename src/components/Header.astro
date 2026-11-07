@@ -1,0 +1,116 @@
+---
+import LangSwitcher from './LangSwitcher.astro';
+import { NAV } from '../data/site';
+import { localizedPath, stripLang, t, type Lang } from '../i18n';
+
+export interface Props {
+  lang: Lang;
+  paths: Record<Lang, string>;
+}
+
+const { lang, paths } = Astro.props;
+const current = stripLang(Astro.url.pathname);
+const isActive = (item: string) => current === `${item}/` || current.startsWith(`${item}/`);
+---
+
+<header class="site-header">
+  <div class="container bar">
+    <a
+      class="brand"
+      href={localizedPath(lang)}
+      aria-label={`${t(lang, 'site.name')} — ${t(lang, 'a11y.home')}`}
+    >
+      <span class="brand-mark" aria-hidden="true">
+        ED
+      </span>
+      <span class="brand-name">{t(lang, 'site.name')}</span>
+    </a>
+    <nav class="nav" aria-label={t(lang, 'a11y.mainNav')}>
+      <ul class="cluster" role="list">
+        {NAV.map((item, i) => (
+          <li>
+            <a href={localizedPath(lang, item)} aria-current={isActive(item) ? 'page' : undefined}>
+              <span class="num" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              {t(lang, `nav.${item}`)}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <LangSwitcher lang={lang} paths={paths} />
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-block-end: var(--border-w) solid var(--border);
+  }
+  .bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-5);
+    padding-block: var(--space-3);
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: var(--target);
+    color: var(--text);
+    font-weight: var(--weight-bold);
+    text-decoration: none;
+    margin-inline-end: auto;
+  }
+  .brand-mark {
+    display: inline-grid;
+    place-items: center;
+    width: var(--space-6);
+    height: var(--space-6);
+    border-radius: var(--radius-sm);
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+  }
+  .nav {
+    order: 3;
+    flex-basis: 100%;
+  }
+  .nav ul {
+    list-style: none;
+    padding: 0;
+    --cluster-space: var(--space-1) var(--space-2);
+  }
+  .nav a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--space-1);
+    min-height: var(--target);
+    align-content: center;
+    padding: var(--space-2);
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: var(--step--1);
+  }
+  .nav a:hover,
+  .nav a[aria-current='page'] {
+    color: var(--text);
+  }
+  .nav a[aria-current='page'] .num {
+    color: var(--accent);
+  }
+  .num {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--text-muted);
+  }
+  @media (min-width: 60rem) {
+    .nav {
+      order: 0;
+      flex-basis: auto;
+    }
+  }
+</style>

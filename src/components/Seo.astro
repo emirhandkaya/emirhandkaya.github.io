@@ -1,0 +1,62 @@
+---
+import { LANGS, LOCALES, localizedPath, otherLang, t, type Lang } from '../i18n';
+
+export interface Props {
+  lang: Lang;
+  /** Page title without the site suffix; omit on the home page. */
+  title?: string;
+  description?: string;
+  /** Locale-less path per language, e.g. { tr: 'blog/x', en: 'blog/x' }. */
+  paths: Record<Lang, string>;
+  /** Absolute or root-relative canonical override (e.g. a post's original URL). */
+  canonical?: string;
+  type?: 'website' | 'article';
+  image?: string;
+  noindex?: boolean;
+}
+
+const {
+  lang,
+  title,
+  description,
+  paths,
+  canonical,
+  type = 'website',
+  image = '/og-default.png',
+  noindex = false,
+} = Astro.props;
+
+const site = Astro.site ?? new URL(Astro.url.origin);
+const abs = (p: string) => new URL(p, site).href;
+
+const fullTitle = title ? t(lang, 'site.titleTemplate', { page: title }) : t(lang, 'site.name');
+const desc = description ?? t(lang, 'site.description');
+const selfUrl = abs(localizedPath(lang, paths[lang]));
+const canonicalUrl = canonical ? abs(canonical) : selfUrl;
+const alternates = LANGS.map((l) => ({ hreflang: l, href: abs(localizedPath(l, paths[l])) }));
+const xDefault = abs(localizedPath('tr', paths.tr));
+const other = otherLang(lang);
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={desc} />
+{noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonicalUrl} />}
+{alternates.map((a) => (
+  <link rel="alternate" hreflang={a.hreflang} href={a.href} />
+))}
+<link rel="alternate" hreflang="x-default" href={xDefault} />
+
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={desc} />
+<meta property="og:url" content={selfUrl} />
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={t(lang, 'site.name')} />
+<meta property="og:locale" content={LOCALES[lang].og} />
+<meta property="og:locale:alternate" content={LOCALES[other].og} />
+<meta property="og:image" content={abs(image)} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={desc} />
+<meta name="twitter:image" content={abs(image)} />

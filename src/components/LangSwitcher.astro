@@ -1,0 +1,73 @@
+---
+import { LANGS, localizedPath, t, type Lang } from '../i18n';
+
+export interface Props {
+  lang: Lang;
+  /** Locale-less path of the current page in each language. */
+  paths: Record<Lang, string>;
+}
+
+const { lang, paths } = Astro.props;
+---
+
+<nav class="switcher" aria-label={t(lang, 'a11y.langSwitcher')}>
+  <ul class="cluster" role="list">
+    {LANGS.map((l) => (
+      <li>
+        <a
+          href={localizedPath(l, paths[l])}
+          hreflang={l}
+          lang={l}
+          aria-label={t(l, `lang.${l}`)}
+          aria-current={l === lang ? 'true' : undefined}
+          data-lang-link={l}
+        >
+          {l.toUpperCase()}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<script>
+  // Remember the chosen language for the root gate (spec §5).
+  for (const a of document.querySelectorAll<HTMLAnchorElement>('[data-lang-link]')) {
+    a.addEventListener('click', () => {
+      try {
+        localStorage.setItem('lang', a.dataset.langLink ?? '');
+      } catch {
+        /* storage blocked: the switch still works, it just is not remembered */
+      }
+    });
+  }
+</script>
+
+<style>
+  .switcher ul {
+    list-style: none;
+    padding: 0;
+    --cluster-space: var(--space-1);
+  }
+  a {
+    display: inline-grid;
+    place-items: center;
+    min-width: var(--target);
+    min-height: var(--target);
+    padding-inline: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: var(--tracking-mono);
+    color: var(--text-muted);
+    text-decoration: none;
+    border: var(--border-w) solid transparent;
+    border-radius: var(--radius-sm);
+  }
+  a:hover {
+    color: var(--text);
+  }
+  a[aria-current] {
+    color: var(--text);
+    border-color: var(--border);
+    background: var(--surface-strong);
+  }
+</style>

@@ -1,0 +1,62 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/tokens.css';
+import '../styles/global.css';
+
+import Seo from '../components/Seo.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { otherLang, t, type Lang } from '../i18n';
+
+export interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  /** Locale-less path of this page, e.g. 'blog/my-post' ('' for home). */
+  path?: string;
+  /** Locale-less path of the same page in the other language, if it differs or is missing ('' → home). */
+  altPath?: string;
+  canonical?: string;
+  type?: 'website' | 'article';
+  image?: string;
+  noindex?: boolean;
+}
+
+const { lang, title, description, path = '', altPath, canonical, type, image, noindex } = Astro.props;
+const paths = { [lang]: path, [otherLang(lang)]: altPath ?? path } as Record<Lang, string>;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <Seo
+      lang={lang}
+      title={title}
+      description={description}
+      paths={paths}
+      canonical={canonical}
+      type={type}
+      image={image}
+      noindex={noindex}
+    />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      {t(lang, 'a11y.skip')}
+    </a>
+    <Header lang={lang} paths={paths} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>

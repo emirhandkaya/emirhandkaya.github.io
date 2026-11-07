@@ -1,0 +1,49 @@
+---
+// Root 404, bilingual (spec §2). TR is the page language; the EN block is marked lang="en".
+import Base from '../layouts/Base.astro';
+import { localizedPath, t } from '../i18n';
+---
+
+<Base lang="tr" title={t('tr', 'notFound.title')} description={t('tr', 'notFound.body')} noindex>
+  <div class="container nf">
+    <p class="code mono" aria-hidden="true">
+      404
+    </p>
+    <section class="stack" aria-labelledby="nf-tr">
+      <h1 id="nf-tr">{t('tr', 'notFound.title')}</h1>
+      <p class="muted">{t('tr', 'notFound.body')}</p>
+      <p>
+        <a class="button button--primary" href={localizedPath('tr')}>
+          {t('tr', 'notFound.back')}
+        </a>
+      </p>
+    </section>
+    <section class="stack" lang="en" aria-labelledby="nf-en">
+      <h2 id="nf-en">{t('en', 'notFound.title')}</h2>
+      <p class="muted">{t('en', 'notFound.body')}</p>
+      <p>
+        <a class="button" href={localizedPath('en')} hreflang="en">
+          {t('en', 'notFound.back')}
+        </a>
+      </p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .nf {
+    display: grid;
+    gap: var(--space-7);
+    padding-block: var(--space-8);
+  }
+  .code {
+    font-size: var(--step-5);
+    color: var(--accent);
+  }
+  .nf section {
+    --stack-space: var(--space-4);
+  }
+  .nf h2 {
+    font-size: var(--step-4);
+  }
+</style>

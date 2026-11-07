@@ -1,0 +1,48 @@
+{
+  "site": {
+    "name": "Emirhan Durmuşkaya",
+    "titleTemplate": "{page} — Emirhan Durmuşkaya",
+    "description": "Emirhan Durmuşkaya'nın kişisel sitesi: projeler, yazılar ve özgeçmiş."
+  },
+  "a11y": {
+    "skip": "İçeriğe geç",
+    "mainNav": "Ana menü",
+    "home": "Ana sayfa",
+    "langSwitcher": "Dil seçimi",
+    "social": "Sosyal bağlantılar",
+    "newTab": "(yeni sekmede açılır)"
+  },
+  "nav": {
+    "projects": "Projeler",
+    "blog": "Yazılar",
+    "resume": "Özgeçmiş",
+    "about": "Hakkımda",
+    "contact": "İletişim"
+  },
+  "lang": {
+    "tr": "Türkçe",
+    "en": "English"
+  },
+  "footer": {
+    "rss": "RSS",
+    "rssLabel": "RSS akışı",
+    "copyright": "© {year} Emirhan Durmuşkaya"
+  },
+  "social": {
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "evrimagaci": "Evrim Ağacı",
+    "academia": "Academia",
+    "medium": "Medium"
+  },
+  "notFound": {
+    "title": "Sayfa bulunamadı",
+    "body": "Aradığınız sayfa yok ya da taşınmış olabilir.",
+    "back": "Türkçe ana sayfaya dön"
+  },
+  "gate": {
+    "title": "Dil seçin",
+    "body": "Tercih ettiğiniz dile yönlendiriliyorsunuz.",
+    "link": "Türkçe devam et"
+  }
+}

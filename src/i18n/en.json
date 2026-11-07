@@ -1,0 +1,48 @@
+{
+  "site": {
+    "name": "Emirhan Durmuşkaya",
+    "titleTemplate": "{page} — Emirhan Durmuşkaya",
+    "description": "Personal site of Emirhan Durmuşkaya: projects, writing and resume."
+  },
+  "a11y": {
+    "skip": "Skip to content",
+    "mainNav": "Main navigation",
+    "home": "Home",
+    "langSwitcher": "Language",
+    "social": "Social links",
+    "newTab": "(opens in a new tab)"
+  },
+  "nav": {
+    "projects": "Projects",
+    "blog": "Writing",
+    "resume": "Resume",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "lang": {
+    "tr": "Türkçe",
+    "en": "English"
+  },
+  "footer": {
+    "rss": "RSS",
+    "rssLabel": "RSS feed",
+    "copyright": "© {year} Emirhan Durmuşkaya"
+  },
+  "social": {
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "evrimagaci": "Evrim Ağacı",
+    "academia": "Academia",
+    "medium": "Medium"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page you are looking for does not exist or may have moved.",
+    "back": "Go to the English home page"
+  },
+  "gate": {
+    "title": "Choose a language",
+    "body": "Redirecting you to your preferred language.",
+    "link": "Continue in English"
+  }
+}
