@@ -1,0 +1,155 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import { LANGS, localizedPath, otherLang, t, type Lang } from '../../../i18n';
+import { slugOf } from '../../../lib/posts';
+import { getProjects, type Project } from '../../../lib/projects';
+
+export async function getStaticPaths() {
+  const ids = new Set((await getCollection('projects')).map((p) => p.id));
+  const paths: {
+    params: { lang: Lang; slug: string };
+    props: { project: Project; hasTranslation: boolean };
+  }[] = [];
+  for (const lang of LANGS) {
+    for (const project of await getProjects(lang)) {
+      const slug = slugOf(project);
+      paths.push({
+        params: { lang, slug },
+        props: { project, hasTranslation: ids.has(`${otherLang(lang)}/${slug}`) },
+      });
+    }
+  }
+  return paths;
+}
+
+const lang = Astro.params.lang as Lang;
+const { project, hasTranslation } = Astro.props;
+const { Content } = await render(project);
+const slug = slugOf(project);
+const d = project.data;
+---
+
+<Base
+  lang={lang}
+  title={d.title}
+  description={d.summary}
+  path={`projects/${slug}`}
+  altPath={hasTranslation ? `projects/${slug}` : 'projects'}
+  type="article"
+>
+  <article class="container project">
+    <header class="head">
+      <p class="mono">
+        <a href={localizedPath(lang, 'projects')}>← {t(lang, 'projects.allProjects')}</a>
+      </p>
+      <h1>{d.title}</h1>
+      <p class="lede muted">{d.summary}</p>
+    </header>
+
+    <section class="card meta" aria-labelledby="details">
+      <h2 id="details" class="visually-hidden">
+        {t(lang, 'projects.details')}
+      </h2>
+      <dl>
+        {d.role && (
+          <div>
+            <dt>{t(lang, 'projects.role')}</dt>
+            <dd>{d.role}</dd>
+          </div>
+        )}
+        {d.date && (
+          <div>
+            <dt>{t(lang, 'projects.year')}</dt>
+            <dd>
+              <time datetime={String(d.date.getUTCFullYear())}>{d.date.getUTCFullYear()}</time>
+            </dd>
+          </div>
+        )}
+        <div>
+          <dt>{t(lang, 'projects.status')}</dt>
+          <dd>{t(lang, `projects.statuses.${d.status}`)}</dd>
+        </div>
+        <div>
+          <dt>{t(lang, 'projects.tags')}</dt>
+          <dd class="mono">{d.tags.map((tag) => `#${tag}`).join(' ')}</dd>
+        </div>
+        {d.links.length > 0 && (
+          <div class="links">
+            <dt>{t(lang, 'projects.links')}</dt>
+            <dd>
+              <ul role="list">
+                {d.links.map((l) => (
+                  <li>
+                    <a href={l.url} rel="noopener" target="_blank">
+                      {l.label}
+                      <span class="visually-hidden">{t(lang, 'a11y.newTab')}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </dd>
+          </div>
+        )}
+      </dl>
+    </section>
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</Base>
+
+<style>
+  .project {
+    display: grid;
+    gap: var(--space-6);
+    padding-block-start: var(--space-7);
+  }
+  .project > * {
+    max-width: var(--measure);
+  }
+  .head {
+    display: grid;
+    gap: var(--space-4);
+  }
+  .head h1 {
+    font-size: var(--step-4);
+  }
+  .lede {
+    font-size: var(--step-1);
+  }
+  dl {
+    display: grid;
+    gap: var(--space-4);
+  }
+  dl > div {
+    display: grid;
+    gap: var(--space-1);
+  }
+  dt {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: var(--tracking-mono);
+    color: var(--text-muted);
+  }
+  .links ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-1);
+  }
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--target-min);
+  }
+  @media (min-width: 48rem) {
+    dl {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .links {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

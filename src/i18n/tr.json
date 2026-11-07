@@ -45,7 +45,7 @@
     "allPosts": "Tüm yazılar",
     "taggedTitle": "#{tag} etiketli yazılar",
     "taggedDescription": "#{tag} etiketli yazılar.",
-    "count": "{n} yazı",
+    "count": { "one": "{n} yazı", "other": "{n} yazı" },
     "originallyPublished": "İlk olarak {site} üzerinde yayımlandı.",
     "readOriginal": "Orijinalini okuyun",
     "fullPaper": "Makalenin tamamını {site} üzerinde okuyun",
@@ -60,6 +60,26 @@
     "pager": "Yazılar arasında gezinme",
     "prev": "Önceki yazı",
     "next": "Sonraki yazı"
+  },
+  "projects": {
+    "title": "Projeler",
+    "description": "Robotik, girişimcilik, yazı ve web üzerine projeler.",
+    "count": { "one": "{n} proje", "other": "{n} proje" },
+    "filterLabel": "Etikete göre filtrele",
+    "all": "Tümü",
+    "shown": { "one": "{n} proje gösteriliyor", "other": "{n} proje gösteriliyor" },
+    "allProjects": "Tüm projeler",
+    "details": "Proje bilgileri",
+    "role": "Rol",
+    "year": "Yıl",
+    "status": "Durum",
+    "tags": "Etiketler",
+    "links": "Bağlantılar",
+    "statuses": {
+      "active": "Devam ediyor",
+      "done": "Tamamlandı",
+      "archived": "Arşivlendi"
+    }
   },
   "rss": {
     "title": "Emirhan Durmuşkaya — Yazılar",

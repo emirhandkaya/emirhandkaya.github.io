@@ -29,7 +29,9 @@ const projects = defineCollection({
     title: z.string(),
     summary: z.string(),
     lang,
-    date: z.coerce.date(),
+    // Optional (departs from spec §3): no source gives a start date for every project,
+    // and dates are never invented. Shown as a year only.
+    date: z.coerce.date().optional(),
     tags: z.array(z.string()).default([]),
     role: z.string().optional(),
     status: z.enum(['active', 'done', 'archived']),

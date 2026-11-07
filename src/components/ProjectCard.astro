@@ -1,0 +1,92 @@
+---
+import { localizedPath, t, type Lang } from '../i18n';
+import { slugOf } from '../lib/posts';
+import type { Project } from '../lib/projects';
+
+export interface Props {
+  project: Project;
+  lang: Lang;
+  level?: 2 | 3;
+}
+
+const { project, lang, level = 2 } = Astro.props;
+const Heading = `h${level}` as 'h2' | 'h3';
+const d = project.data;
+const href = localizedPath(lang, `projects/${slugOf(project)}`);
+---
+
+<article class="card project-card">
+  <p class="meta">
+    {d.date && <span>{d.date.getUTCFullYear()}</span>}
+    {d.date && <span aria-hidden="true">·</span>}
+    <span class="status" data-status={d.status}>
+      {t(lang, `projects.statuses.${d.status}`)}
+    </span>
+  </p>
+  <Heading class="title">
+    <a href={href}>{d.title}</a>
+  </Heading>
+  <p class="muted summary">{d.summary}</p>
+  <ul class="tags" role="list" aria-label={t(lang, 'projects.tags')}>
+    {d.tags.map((tag) => (
+      <li>#{tag}</li>
+    ))}
+  </ul>
+</article>
+
+<style>
+  .project-card {
+    position: relative;
+    display: grid;
+    gap: var(--space-3);
+    align-content: start;
+    height: 100%;
+  }
+  .meta,
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: var(--tracking-mono);
+    color: var(--text-muted);
+  }
+  .tags {
+    list-style: none;
+    padding: 0;
+  }
+  .status[data-status='active']::before {
+    content: '';
+    display: inline-block;
+    width: var(--space-2);
+    height: var(--space-2);
+    margin-inline-end: var(--space-1);
+    border-radius: var(--radius-pill);
+    background: var(--accent);
+  }
+  .title {
+    font-size: var(--step-1);
+    letter-spacing: normal;
+  }
+  .title a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+  }
+  .project-card:hover .title a {
+    color: var(--accent);
+  }
+  .project-card:has(.title a:focus-visible) {
+    outline: var(--focus-w) solid var(--focus);
+    outline-offset: var(--focus-offset);
+  }
+  .title a:focus-visible {
+    outline: none;
+  }
+</style>

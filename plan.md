@@ -40,6 +40,7 @@ Stages 0–1 produced the scaffold (Astro 7 minimal + MDX + sitemap + RSS, repor
 - `src/components/ProjectCard.astro`, `TagFilter.astro` (small inline script, `aria-pressed`, `?tag=`, no-JS shows all).
 - Pages `[lang]/projects/index.astro`, `[lang]/projects/[slug].astro`.
 - Proof: keyboard filter works; detail pages show Problem/Approach/Result.
+- As built (departures): projects are Turing Robotics, Valmeto, Writing and This website (slugs `turing-robotics`, `valmeto`, `writing`, `personal-website`). The project `date` is optional and shown as a year only: no source gives Valmeto's start date, and dates are never invented. Unknowns (Emirhan's team role, Valmeto details) are HTML-comment TODOs, and `role` is left out when unsourced, keeping visible TODOs to About/Resume. The filter selects one tag at a time; pressing it again shows all. The filter group is `hidden` until JS runs, and a polite status region announces the count. Added `tn()` (Intl.PluralRules) for counts: `blog.count`, `projects.count` and `projects.shown` are `{one, other}` objects. Checked in the browser pane: Enter/Space toggle, `?tag=` set, cleared and honoured on load, no horizontal scroll at 375px.
 
 **M4 — Home, About, Contact, Resume**
 

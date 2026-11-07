@@ -34,6 +34,19 @@ export function t(lang: Lang, key: string, vars: Record<string, string | number>
   return node.replace(/\{(\w+)\}/g, (m, name: string) => (name in vars ? String(vars[name]) : m));
 }
 
+/**
+ * Plural-aware lookup: `key` is an object with Intl.PluralRules categories
+ * (at least `other`), e.g. tn('en', 'blog.count', 1) with blog.count = { one, other }. `{n}` is filled in.
+ */
+export function tn(lang: Lang, key: string, n: number): string {
+  const rule = new Intl.PluralRules(lang).select(n);
+  let node: string | Dict | undefined = dicts[lang];
+  for (const part of key.split('.')) node = typeof node === 'object' ? node[part] : undefined;
+  const pick = typeof node === 'object' ? (node[rule] ?? node.other) : undefined;
+  if (typeof pick !== 'string') throw new Error(`i18n: missing plural key "${key}" for "${lang}"`);
+  return pick.replace(/\{n\}/g, String(n));
+}
+
 export function otherLang(lang: Lang): Lang {
   return lang === 'tr' ? 'en' : 'tr';
 }

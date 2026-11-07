@@ -1,0 +1,55 @@
+---
+import Base from '../../../layouts/Base.astro';
+import ProjectCard from '../../../components/ProjectCard.astro';
+import TagFilter from '../../../components/TagFilter.astro';
+import { LANGS, t, tn, type Lang } from '../../../i18n';
+import { getProjects, projectTags } from '../../../lib/projects';
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const projects = await getProjects(lang);
+const tags = projectTags(projects);
+---
+
+<Base
+  lang={lang}
+  title={t(lang, 'projects.title')}
+  description={t(lang, 'projects.description')}
+  path="projects"
+>
+  <div class="container">
+    <header class="page-head">
+      <h1>{t(lang, 'projects.title')}</h1>
+      <p class="muted">{t(lang, 'projects.description')}</p>
+      <p class="mono muted">{tn(lang, 'projects.count', projects.length)}</p>
+    </header>
+    <TagFilter lang={lang} tags={tags} />
+    <ul class="grid" role="list">
+      {projects.map((project) => (
+        <li data-tags={project.data.tags.join(' ')}>
+          <ProjectCard project={project} lang={lang} />
+        </li>
+      ))}
+    </ul>
+  </div>
+</Base>
+
+<style>
+  .grid {
+    display: grid;
+    gap: var(--space-4);
+    list-style: none;
+    padding: 0;
+  }
+  .grid > [hidden] {
+    display: none;
+  }
+  @media (min-width: 48rem) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

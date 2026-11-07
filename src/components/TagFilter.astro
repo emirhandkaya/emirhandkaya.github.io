@@ -1,0 +1,127 @@
+---
+// Progressive-enhancement tag filter (spec §2): hidden without JS, so every card stays visible.
+// Items to filter carry data-tags="a b c". One tag at a time; pressing it again shows all.
+// State is mirrored to ?tag=.
+import { t, tn, type Lang } from '../i18n';
+
+export interface Props {
+  lang: Lang;
+  tags: string[];
+}
+
+const { lang, tags } = Astro.props;
+---
+
+<div
+  class="filter"
+  data-filter
+  data-shown-one={tn(lang, 'projects.shown', 1).replace('1', '{n}')}
+  data-shown-other={tn(lang, 'projects.shown', 2).replace('2', '{n}')}
+  hidden
+>
+  <p id="filter-label" class="label mono">
+    {t(lang, 'projects.filterLabel')}
+  </p>
+  <div class="buttons" role="group" aria-labelledby="filter-label">
+    <button type="button" data-tag="" aria-pressed="true">
+      {t(lang, 'projects.all')}
+    </button>
+    {tags.map((tag) => (
+      <button type="button" data-tag={tag} aria-pressed="false">
+        #{tag}
+      </button>
+    ))}
+  </div>
+  <p class="visually-hidden" role="status" data-filter-status></p>
+</div>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-filter]');
+  if (root) {
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>('button[data-tag]')];
+    const items = [...document.querySelectorAll<HTMLElement>('[data-tags]')];
+    const status = root.querySelector<HTMLElement>('[data-filter-status]');
+    const plural = new Intl.PluralRules(document.documentElement.lang);
+    const shownText = (n: number) =>
+      ((plural.select(n) === 'one' ? root.dataset.shownOne : root.dataset.shownOther) ?? '{n}').replace(
+        '{n}',
+        String(n),
+      );
+
+    const apply = (wanted: string, fromUser: boolean) => {
+      const tag = buttons.some((b) => b.dataset.tag === wanted) ? wanted : '';
+      for (const b of buttons) b.setAttribute('aria-pressed', String(b.dataset.tag === tag));
+      let shown = 0;
+      for (const item of items) {
+        const match = !tag || (item.dataset.tags ?? '').split(' ').includes(tag);
+        item.hidden = !match;
+        if (match) shown++;
+      }
+      if (fromUser) {
+        if (status) status.textContent = shownText(shown);
+        const url = new URL(location.href);
+        if (tag) url.searchParams.set('tag', tag);
+        else url.searchParams.delete('tag');
+        history.replaceState(null, '', url);
+      }
+    };
+
+    for (const b of buttons) {
+      b.addEventListener('click', () => {
+        const tag = b.dataset.tag ?? '';
+        const wasPressed = b.getAttribute('aria-pressed') === 'true';
+        apply(wasPressed && tag ? '' : tag, true);
+      });
+    }
+
+    root.hidden = false;
+    apply(new URL(location.href).searchParams.get('tag') ?? '', false);
+  }
+</script>
+
+<style>
+  .filter {
+    display: grid;
+    gap: var(--space-3);
+    margin-block-end: var(--space-6);
+  }
+  .filter[hidden] {
+    display: none;
+  }
+  .label {
+    font-size: var(--step--1);
+    color: var(--text-muted);
+  }
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  button {
+    min-height: var(--target);
+    padding: var(--space-1) var(--space-4);
+    border: var(--border-w) solid var(--border);
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: var(--tracking-mono);
+    cursor: pointer;
+    transition:
+      background-color var(--dur-fast) var(--ease),
+      border-color var(--dur-fast) var(--ease),
+      color var(--dur-fast) var(--ease);
+  }
+  button:hover {
+    color: var(--text);
+    border-color: var(--accent);
+  }
+  /* Pressed state is shown by fill + weight, not color alone */
+  button[aria-pressed='true'] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
+    font-weight: var(--weight-bold);
+  }
+</style>

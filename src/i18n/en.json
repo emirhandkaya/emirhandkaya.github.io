@@ -45,7 +45,7 @@
     "allPosts": "All posts",
     "taggedTitle": "Posts tagged #{tag}",
     "taggedDescription": "Posts tagged #{tag}.",
-    "count": "{n} posts",
+    "count": { "one": "{n} post", "other": "{n} posts" },
     "originallyPublished": "Originally published on {site}.",
     "readOriginal": "Read the original",
     "fullPaper": "Read the full paper on {site}",
@@ -60,6 +60,26 @@
     "pager": "Post navigation",
     "prev": "Previous post",
     "next": "Next post"
+  },
+  "projects": {
+    "title": "Projects",
+    "description": "Projects in robotics, entrepreneurship, writing and the web.",
+    "count": { "one": "{n} project", "other": "{n} projects" },
+    "filterLabel": "Filter by tag",
+    "all": "All",
+    "shown": { "one": "{n} project shown", "other": "{n} projects shown" },
+    "allProjects": "All projects",
+    "details": "Project details",
+    "role": "Role",
+    "year": "Year",
+    "status": "Status",
+    "tags": "Tags",
+    "links": "Links",
+    "statuses": {
+      "active": "Ongoing",
+      "done": "Done",
+      "archived": "Archived"
+    }
   },
   "rss": {
     "title": "Emirhan Durmuşkaya — Writing",
