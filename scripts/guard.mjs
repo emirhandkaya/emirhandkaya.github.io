@@ -7,6 +7,7 @@
 // Prints failures + a summary; exits non-zero on any failure.
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
+import { createHash } from 'node:crypto';
 
 const LANGS = ['tr', 'en'];
 const PUBLIC_EMAIL = 'emirhandurmuskaya@gmail.com';
@@ -119,11 +120,23 @@ const BANNED = [
   { re: /doğum tarihi|date of birth|born (?:on|in)\b/gi, what: 'birth date wording' },
   { re: /\b\d{1,2}\.\s*sınıf\b|\b\d{1,2}(?:st|nd|rd|th)[\s-]grade\b/gi, what: 'school grade' },
 ];
+// Words that must never appear (Valmeto registered-address districts), stored only as
+// SHA-256 of the Turkish-lowercased word so this public repo doesn't publish them.
+const BANNED_WORD_HASHES = new Set([
+  '07d30d259e11e57a97024bacc6d33bcfe8904543ac38a15b79649cde5a78d6ae',
+  '24a5229ef59c8388eecfa23b7dd24b57751808058d6d53d8bdd4f5bdf4190a2e',
+  '62a83444eccdb74992a1044bbe7a8f7d6dc22c003736b7bfbec40c1a1065dc5e',
+  '995b4f199e158adfe0b289095113b203f6e5f716f60a476e120e41f6c4a3a3d2',
+]);
+const sha256 = (w) => createHash('sha256').update(w).digest('hex');
 for (const f of files('dist', (p) => /\.(html|xml|txt|json)$/.test(p))) {
   const s = readFileSync(f, 'utf8');
   for (const { re, what, allow } of BANNED)
     for (const m of s.matchAll(re))
       if (!allow?.(m[0])) fail('privacy', `${rel(f)} contains ${what}: "${m[0]}"`);
+  const words = new Set(s.toLocaleLowerCase('tr').match(/\p{L}+/gu) ?? []);
+  for (const w of words)
+    if (BANNED_WORD_HASHES.has(sha256(w))) fail('privacy', `${rel(f)} contains a banned address word`);
 }
 
 // ---- Contrast of token pairs -------------------------------------------------
