@@ -1,10 +1,11 @@
 ---
-# Facts: research/profile-notes.md (SITE self-claims, VALMETO). No founding date in any source, so no `date`.
+# Facts: research/profile-notes.md (VALMETO, OWNER-CV).
 title: 'Valmeto'
-summary: 'A B2B international trading company supplying non-ferrous metals (copper, brass, bronze, aluminium).'
+summary: 'A B2B international trading company I founded in 2026, supplying non-ferrous metals (copper, brass, bronze, aluminium).'
 lang: en
+date: 2026-01-01 # founded 2026 (OWNER-CV); shown as the year only
 tags: [entrepreneurship, international-trade]
-role: 'Founder (self-described)'
+role: 'Founder'
 status: active
 featured: true
 order: 2
@@ -13,16 +14,14 @@ links:
     url: https://www.valmeto.com/
 ---
 
-<!-- TODO (owner): founding year, Emirhan's responsibilities and any results Valmeto can share publicly. -->
-
 ## Problem
 
 Manufacturers, distributors and industrial buyers need a reliable supplier of non-ferrous metals.
 
 ## Approach
 
-Valmeto İç ve Dış Ticaret Ltd. Şti. is a B2B company supplying copper, brass, bronze and aluminium, as well as cable and wire. It focuses on Europe and also sources globally. Its services are sourcing, technical product support, and export and logistics coordination.
+I founded Valmeto İç ve Dış Ticaret Ltd. Şti. in 2026. The company supplies copper, brass, bronze and aluminium, as well as cable and wire; it focuses on Europe and also sources globally. I manage export operations and business development.
 
 ## Result
 
-Emirhan describes himself as the founder of Valmeto. The company's services and contact details are on valmeto.com.
+Valmeto offers sourcing, technical product support, and export and logistics coordination. Details are on valmeto.com.

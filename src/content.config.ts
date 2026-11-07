@@ -55,8 +55,13 @@ const resume = defineCollection({
     summary: z.string(),
     experience: z.array(entry),
     robotics: z.array(entry),
+    sports: z.array(entry),
+    projects: z.array(entry),
+    education: z.array(entry),
     writing: z.array(entry),
     skills: z.array(z.string()),
+    languages: z.array(z.string()),
+    interests: z.array(z.string()),
     links: z.array(z.object({ label: z.string(), url: z.url() })),
   }),
 });

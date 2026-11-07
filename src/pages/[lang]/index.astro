@@ -1,7 +1,9 @@
 ---
+import { getEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PostCard from '../../components/PostCard.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
+import SectionHead from '../../components/SectionHead.astro';
 import { SOCIALS } from '../../data/site';
 import { LANGS, localizedPath, t, type Lang } from '../../i18n';
 import { getPosts } from '../../lib/posts';
@@ -12,10 +14,26 @@ export function getStaticPaths() {
 }
 
 const lang = Astro.params.lang as Lang;
-const featured = (await getProjects(lang)).filter((p) => p.data.featured).slice(0, 3);
-const latest = (await getPosts(lang)).slice(0, 3);
+const projects = (await getProjects(lang)).filter((p) => p.data.featured).slice(0, 3);
+const posts = await getPosts(lang);
+const latest = posts.slice(0, 3);
+const resume = (await getEntry('resume', lang))?.data;
+const PRESS_URL =
+  'https://girisimciturk.tv/girisimcilik/turkiyeden-dunya-sahnesine-bir-robotik-takiminin-basari-hikayesi/';
 
-// JSON-LD Person — every field from research/profile-notes.md (SITE self-claims, Owner decisions).
+// Facts: research/profile-notes.md (FIRST-AWARDS, OWNER-CV, Owner decisions).
+const stats = [
+  { value: '#10141', label: t(lang, 'home.statTeam') },
+  { value: '2026', label: t(lang, 'home.statWin') },
+  { value: '4', label: t(lang, 'home.statGrants') },
+  { value: String(posts.length), label: t(lang, 'home.statPosts') },
+];
+const now = [
+  { k: t(lang, 'home.nowTuring'), v: t(lang, 'home.nowTuringText') },
+  { k: t(lang, 'home.nowGrants'), v: t(lang, 'home.nowGrantsText') },
+  { k: t(lang, 'home.nowValmeto'), v: t(lang, 'home.nowValmetoText') },
+];
+
 const site = Astro.site ?? new URL(Astro.url.origin);
 const person = {
   '@context': 'https://schema.org',
@@ -23,11 +41,21 @@ const person = {
   name: t(lang, 'site.name'),
   alternateName: 'Emirhan Durmuskaya',
   url: new URL(localizedPath(lang), site).href,
-  jobTitle: 'Founder at Valmeto',
+  jobTitle: 'Founder, Valmeto',
   worksFor: { '@type': 'Organization', name: 'Valmeto', url: 'https://www.valmeto.com/' },
-  memberOf: { '@type': 'SportsTeam', name: 'Turing Robotics (FRC #10141)' },
+  founder: [{ '@type': 'Organization', name: 'Turing Robotics (FRC #10141)' }],
+  alumniOf: { '@type': 'HighSchool', name: 'Halil Bekmezci Anadolu Lisesi' },
   address: { '@type': 'PostalAddress', addressLocality: 'İstanbul', addressCountry: 'TR' },
-  knowsAbout: ['Entrepreneurship', 'Industrial materials', 'FIRST Robotics Competition', 'Robotics', 'STEM'],
+  knowsLanguage: ['tr', 'en'],
+  knowsAbout: [
+    'Entrepreneurship',
+    'International trade',
+    'FIRST Robotics Competition',
+    'Robotics',
+    'Rugby',
+    'Physics',
+    'Philosophy',
+  ],
   sameAs: SOCIALS.map((s) => s.url),
 };
 ---
@@ -35,131 +63,274 @@ const person = {
 <Base lang={lang} path="">
   <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(person)} />
   <section class="container hero" aria-labelledby="hero-title">
-    <p class="role mono">{t(lang, 'home.role')}</p>
-    <h1 id="hero-title">{t(lang, 'site.name')}</h1>
-    <p class="intro muted">{t(lang, 'home.intro')}</p>
-    <p class="cluster ctas">
-      <a class="button button--primary" href={localizedPath(lang, 'projects')}>
-        {t(lang, 'home.ctaProjects')}
-      </a>
-      <a class="button" href={localizedPath(lang, 'resume')}>
-        {t(lang, 'home.ctaResume')}
-      </a>
-    </p>
-  </section>
-
-  <section class="container highlights-wrap reveal" aria-labelledby="highlights">
-    <h2 id="highlights" class="visually-hidden">
-      {t(lang, 'home.highlights')}
-    </h2>
-    <ul class="highlights" role="list">
-      <li class="card">
-        <p class="hl-title">{t(lang, 'home.highlightWin')}</p>
-        <p class="mono muted">{t(lang, 'home.highlightWinSub')}</p>
-      </li>
-      <li class="card">
-        <p class="hl-title">{t(lang, 'home.highlightQualified')}</p>
-        <p class="mono muted">{t(lang, 'home.highlightQualifiedSub')}</p>
-      </li>
-    </ul>
-  </section>
-
-  <section class="container block reveal" aria-labelledby="featured">
-    <div class="block-head">
-      <h2 id="featured">{t(lang, 'home.featured')}</h2>
-      <a class="mono" href={localizedPath(lang, 'projects')}>
-        {t(lang, 'home.seeAllProjects')} →
-      </a>
+    <div class="hero-main">
+      <p class="eyebrow">{t(lang, 'home.eyebrow')}</p>
+      <h1 id="hero-title">{t(lang, 'site.name')}</h1>
+      <p class="role">{t(lang, 'home.role')}</p>
+      <p class="intro">{t(lang, 'home.intro')}</p>
+      <p class="cluster ctas">
+        <a class="button button--primary" href={localizedPath(lang, 'projects')}>
+          {t(lang, 'home.ctaProjects')}
+        </a>
+        <a class="button" href={localizedPath(lang, 'resume')}>
+          {t(lang, 'home.ctaResume')}
+        </a>
+        <a class="button" href={localizedPath(lang, 'contact')}>
+          {t(lang, 'home.ctaContact')}
+        </a>
+      </p>
     </div>
-    <ul class="grid" role="list">
-      {featured.map((project) => (
+    <aside class="now" aria-labelledby="now-title">
+      <h2 id="now-title" class="now-title">
+        <span class="dot" aria-hidden="true"></span>
+        {t(lang, 'home.now')}
+      </h2>
+      <dl>
+        {now.map((n) => (
+          <div>
+            <dt>{n.k}</dt>
+            <dd>{n.v}</dd>
+          </div>
+        ))}
+      </dl>
+    </aside>
+  </section>
+
+  <section class="container reveal" aria-labelledby="stats-title">
+    <h2 id="stats-title" class="visually-hidden">
+      {t(lang, 'home.stats')}
+    </h2>
+    <dl class="stats">
+      {stats.map((s) => (
+        <div>
+          <dt>{s.label}</dt>
+          <dd>{s.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <section class="container section reveal" aria-labelledby="featured">
+    <SectionHead
+      id="featured"
+      index={1}
+      title={t(lang, 'home.featured')}
+      href={localizedPath(lang, 'projects')}
+      linkText={t(lang, 'home.seeAllProjects')}
+    />
+    <ul class="rows" role="list">
+      {projects.map((project, i) => (
         <li>
-          <ProjectCard project={project} lang={lang} level={3} />
+          <ProjectCard project={project} lang={lang} index={i + 1} level={3} />
         </li>
       ))}
     </ul>
   </section>
 
-  <section class="container block reveal" aria-labelledby="latest">
-    <div class="block-head">
-      <h2 id="latest">{t(lang, 'home.latest')}</h2>
-      <a class="mono" href={localizedPath(lang, 'blog')}>
-        {t(lang, 'home.seeAllPosts')} →
-      </a>
-    </div>
-    <ul class="list" role="list">
+  {resume && (
+    <section class="container section reveal" aria-labelledby="experience">
+      <SectionHead
+        id="experience"
+        index={2}
+        title={t(lang, 'home.experience')}
+        href={localizedPath(lang, 'resume')}
+        linkText={t(lang, 'home.seeResume')}
+      />
+      <ol class="timeline" role="list">
+        {resume.experience.map((e) => (
+          <li>
+            <p class="row-meta">{e.period}</p>
+            <div>
+              <h3>{e.title}</h3>
+              <p class="muted">{e.org}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+  )}
+
+  <section class="container section reveal" aria-labelledby="latest">
+    <SectionHead
+      id="latest"
+      index={3}
+      title={t(lang, 'home.latest')}
+      href={localizedPath(lang, 'blog')}
+      linkText={t(lang, 'home.seeAllPosts')}
+    />
+    <ul class="rows" role="list">
       {latest.map((post) => (
         <li>
-          <PostCard post={post} lang={lang} level={3} />
+          <PostCard post={post} lang={lang} level={3} compact />
         </li>
       ))}
     </ul>
+  </section>
+
+  <section class="container section reveal" aria-labelledby="press">
+    <SectionHead id="press" index={4} title={t(lang, 'home.press')} />
+    <figure class="press">
+      <blockquote>
+        <p>{t(lang, 'home.pressTitle')}</p>
+      </blockquote>
+      <figcaption>
+        <p class="row-meta">{t(lang, 'home.pressMeta')}</p>
+        <p class="muted">{t(lang, 'home.pressText')}</p>
+        <p>
+          <a href={PRESS_URL} rel="noopener" target="_blank">
+            {t(lang, 'home.pressLink')} →<span class="visually-hidden"> {t(lang, 'a11y.newTab')}</span>
+          </a>
+        </p>
+      </figcaption>
+    </figure>
   </section>
 </Base>
 
 <style>
   .hero {
     display: grid;
-    gap: var(--space-4);
+    gap: var(--space-7);
     padding-block: var(--space-8) var(--space-7);
   }
-  .role {
-    color: var(--accent);
+  .hero-main {
+    display: grid;
+    gap: var(--space-4);
+    align-content: start;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
     font-size: var(--step--1);
+    letter-spacing: var(--tracking-mono);
+    color: var(--text-muted);
   }
   .hero h1 {
-    font-size: var(--step-5);
+    font-size: var(--step-6);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+  }
+  .role {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--accent);
   }
   .intro {
     font-size: var(--step-1);
     max-width: var(--measure);
+    color: var(--text-muted);
   }
   .ctas {
-    margin-block-start: var(--space-3);
+    margin-block-start: var(--space-2);
   }
-  .highlights {
+  .now {
+    align-self: end;
+    border-inline-start: var(--focus-w) solid var(--accent);
+    padding-inline-start: var(--space-5);
     display: grid;
     gap: var(--space-4);
-    list-style: none;
-    padding: 0;
   }
-  .highlights .card {
+  .now-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-mono);
+    color: var(--accent);
+  }
+  .dot {
+    width: var(--space-2);
+    height: var(--space-2);
+    border-radius: var(--radius-pill);
+    background: var(--accent);
+  }
+  .now dl {
     display: grid;
-    gap: var(--space-1);
-    border-inline-start: var(--focus-w) solid var(--accent);
+    gap: var(--space-4);
   }
-  .hl-title {
+  .now dt {
     font-weight: var(--weight-bold);
   }
-  .block {
-    padding-block-start: var(--space-8);
+  .now dd {
+    margin: 0;
+    color: var(--text-muted);
   }
-  .block-head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--space-3);
-    margin-block-end: var(--space-5);
-  }
-  .block-head h2 {
-    font-size: var(--step-2);
-  }
-  .block-head a {
-    font-size: var(--step--1);
-  }
-  .grid {
+  .stats {
     display: grid;
-    gap: var(--space-4);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-block: var(--border-w) solid var(--border);
+  }
+  .stats > div {
+    display: grid;
+    align-content: start;
+    gap: var(--space-1);
+    padding: var(--space-5) var(--space-4) var(--space-5) 0;
+  }
+  .stats dd {
+    order: -1;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--step-3);
+    color: var(--text);
+  }
+  .stats dt {
+    font-size: var(--step--1);
+    color: var(--text-muted);
+  }
+  .timeline {
     list-style: none;
     padding: 0;
   }
+  .timeline li {
+    display: grid;
+    gap: var(--space-1) var(--space-5);
+    padding-block: var(--space-4);
+  }
+  .timeline li + li {
+    border-block-start: var(--border-w) solid var(--border);
+  }
+  .timeline h3 {
+    font-size: var(--step-1);
+    letter-spacing: normal;
+  }
+  .press {
+    margin: 0;
+    display: grid;
+    gap: var(--space-4);
+  }
+  .press blockquote {
+    margin: 0;
+    font-size: var(--step-3);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--leading-tight);
+    max-width: var(--measure);
+  }
+  .press blockquote p::before {
+    content: '“';
+    color: var(--accent);
+  }
+  .press blockquote p::after {
+    content: '”';
+    color: var(--accent);
+  }
+  .press figcaption {
+    display: grid;
+    gap: var(--space-2);
+  }
   @media (min-width: 48rem) {
-    .highlights {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .stats {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
-    .grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+    .timeline li {
+      grid-template-columns: var(--row-meta-w) minmax(0, 1fr);
+      align-items: baseline;
+    }
+  }
+  @media (min-width: 60rem) {
+    .hero {
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+      align-items: end;
     }
   }
 </style>

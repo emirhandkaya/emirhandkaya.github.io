@@ -17,7 +17,15 @@ const r = entry.data;
 const sections = [
   { key: 'experience', items: r.experience },
   { key: 'robotics', items: r.robotics },
+  { key: 'sports', items: r.sports },
+  { key: 'projects', items: r.projects },
+  { key: 'education', items: r.education },
   { key: 'writing', items: r.writing },
+] as const;
+const lists = [
+  { key: 'skills', items: r.skills },
+  { key: 'languages', items: r.languages },
+  { key: 'interests', items: r.interests },
 ] as const;
 ---
 
@@ -59,14 +67,16 @@ const sections = [
       </section>
     ))}
 
-    <section aria-labelledby="r-skills">
-      <h2 id="r-skills">{t(lang, 'resume.skills')}</h2>
-      <ul class="skills" role="list">
-        {r.skills.map((s) => (
-          <li>{s}</li>
-        ))}
-      </ul>
-    </section>
+    {lists.map((l) => (
+      <section aria-labelledby={`r-${l.key}`}>
+        <h2 id={`r-${l.key}`}>{t(lang, `resume.${l.key}`)}</h2>
+        <ul class="skills" role="list">
+          {l.items.map((s) => (
+            <li>{s}</li>
+          ))}
+        </ul>
+      </section>
+    ))}
 
     <section aria-labelledby="r-links">
       <h2 id="r-links">{t(lang, 'resume.links')}</h2>

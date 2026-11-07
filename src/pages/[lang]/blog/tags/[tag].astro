@@ -40,7 +40,7 @@ const slug = tagSlug(tag);
       <h1>{t(lang, 'blog.taggedTitle', { tag })}</h1>
       <p class="mono muted">{tn(lang, 'blog.count', posts.length)}</p>
     </header>
-    <ul class="list" role="list">
+    <ul class="rows rows--ruled" role="list">
       {posts.map((post) => (
         <li>
           <PostCard post={post} lang={lang} />

@@ -1,34 +1,82 @@
 {
-  "summary": "Entrepreneur based in İstanbul; founder of Valmeto (self-described) and member of the FRC #10141 Turing Robotics team. Researches and writes on science (especially physics), philosophy and history.",
+  "summary": "Entrepreneur in İstanbul. Founder of Valmeto; founder, former captain and lead mentor of FRC #10141 Turing Robotics. Member of the Turkish Rugby Federation’s Central Referee Committee and a licensed rugby player. Writes on physics and philosophy.",
   "experience": [
     {
-      "title": "Founder (self-described)",
+      "title": "Founder",
       "org": "Valmeto İç ve Dış Ticaret Ltd. Şti.",
-      "period": "TODO",
-      "description": "B2B international trading company supplying non-ferrous metals (copper, brass, bronze, aluminium; cable and wire). Europe-focused; sourcing, technical product support, export and logistics coordination.",
+      "period": "2026 – present",
+      "description": "Manages export operations and business development in international trade. A B2B company supplying non-ferrous metals (copper, brass, bronze, aluminium; cable and wire).",
       "url": "https://www.valmeto.com/"
+    },
+    {
+      "title": "Founder & former team captain · Lead mentor",
+      "org": "Turing Robotics — FRC #10141",
+      "period": "2025 – present",
+      "description": "The FIRST Robotics Competition team of Halil Bekmezci Anadolu Lisesi. Engineering, leadership and problem-solving through robotics.",
+      "url": "https://frc-events.firstinspires.org/team/10141"
+    },
+    {
+      "title": "Central Referee Committee member & referee",
+      "org": "Turkish Rugby Federation",
+      "period": "2025 – 2026",
+      "description": "Contributes to national-level referee governance and officiates official matches."
     }
   ],
   "robotics": [
     {
-      "title": "Team member (role: TODO)",
-      "org": "Turing Robotics, FRC #10141 — Halil Bekmezci Anadolu Lisesi",
-      "period": "TODO",
-      "description": "FIRST Robotics Competition team; rookie year 2025.",
-      "url": "https://frc-events.firstinspires.org/team/10141"
-    },
-    {
-      "title": "“Regional Winners” — 2026 İstanbul Regional",
-      "org": "FIRST Robotics Competition",
+      "title": "İstanbul Regional champion (“Regional Winners”)",
+      "org": "FIRST Robotics Competition — 2026 İstanbul Regional",
       "period": "2026",
-      "description": "Team award; season game REBUILT presented by Haas.",
       "url": "https://frc-events.firstinspires.org/2026/TUIS/awards"
     },
     {
       "title": "Qualified for the FIRST Championship (Houston)",
       "org": "FIRST Robotics Competition",
-      "period": "2026",
-      "description": "The team qualified for the FIRST Championship in Houston."
+      "period": "2026"
+    },
+    {
+      "title": "Grants from Boeing, 3M, RTX and Rockwell",
+      "org": "2027 season",
+      "period": "2027"
+    },
+    {
+      "title": "Bosphorus Regional and Gotham Regional",
+      "org": "2027 season events",
+      "period": "2027"
+    }
+  ],
+  "sports": [
+    {
+      "title": "Rugby — licensed athlete",
+      "period": "2024 – 2026",
+      "description": "2025 national team tryouts; Men’s 1st League (2025–2026), U18 1st League (2024–2025); 2025 İstanbul school champion and group champion; 2024 İstanbul school champion."
+    },
+    {
+      "title": "Basketball — licensed player, high school team",
+      "period": "2021 – 2023"
+    },
+    {
+      "title": "Kickboxing — licensed athlete",
+      "period": "2015 – 2018"
+    }
+  ],
+  "projects": [
+    {
+      "title": "TÜBİTAK 4006 Science Fair",
+      "period": "2025",
+      "description": "Led an applied science project."
+    },
+    {
+      "title": "Young Entrepreneurs",
+      "period": "2023",
+      "description": "Digital project lead."
+    }
+  ],
+  "education": [
+    {
+      "title": "Halil Bekmezci Anatolian High School",
+      "org": "İstanbul",
+      "period": "Graduated: June 2025"
     }
   ],
   "writing": [
@@ -43,16 +91,19 @@
       "title": "Papers on Academia",
       "org": "Academia (ufens)",
       "period": "2022 – 2025",
-      "description": "Three works, including “Why Was İskilipli Atıf Hanged?”.",
+      "description": "Conceptual analyses in physics and philosophy; three works, including “Why Was İskilipli Atıf Hanged?”.",
       "url": "https://independent.academia.edu/ufens"
     }
   ],
   "skills": [
-    "Entrepreneurship",
-    "International trade (non-ferrous metals)",
-    "Robotics (FRC)",
-    "Research and essay writing"
+    "Robotics engineering (advanced)",
+    "Web development (advanced)",
+    "SolidWorks (intermediate)",
+    "Python (intermediate)",
+    "International trade"
   ],
+  "languages": ["Turkish (native)", "English (B2)"],
+  "interests": ["Creative writing", "Physics", "Philosophy", "International trade"],
   "links": [
     { "label": "GitHub", "url": "https://github.com/emirhandkaya" },
     { "label": "LinkedIn", "url": "https://www.linkedin.com/in/emirhan-durmuskaya-973546239/" },

@@ -1,61 +1,46 @@
 ---
-import PostMeta from './PostMeta.astro';
+// Post as an editorial row: date + reading time | title, excerpt, tags | arrow.
 import TagList from './TagList.astro';
-import { localizedPath, type Lang } from '../i18n';
+import { formatDate, localizedPath, t, type Lang } from '../i18n';
 import { describe, slugOf, type Post } from '../lib/posts';
 import { readingTime } from '../lib/readingTime';
 
 export interface Props {
   post: Post;
   lang: Lang;
-  /** Heading level of the card title (default h2). */
   level?: 2 | 3;
+  /** Hide the excerpt (compact lists). */
+  compact?: boolean;
 }
 
-const { post, lang, level = 2 } = Astro.props;
+const { post, lang, level = 2, compact = false } = Astro.props;
 const Heading = `h${level}` as 'h2' | 'h3';
 const href = localizedPath(lang, `blog/${slugOf(post)}`);
+const date = post.data.date;
 ---
 
-<article class="card card--link post-card">
-  <PostMeta lang={lang} date={post.data.date} minutes={readingTime(post.body ?? '')} />
-  <Heading class="title">
-    <a href={href}>{post.data.title}</a>
-  </Heading>
-  <p class="muted excerpt">{describe(post)}</p>
-  <TagList lang={lang} tags={post.data.tags} />
+<article class="row post-row">
+  <p class="row-meta">
+    <time datetime={date.toISOString().slice(0, 10)}>{formatDate(lang, date)}</time>
+    <br />
+    {t(lang, 'blog.readingTime', { n: readingTime(post.body ?? '') })}
+  </p>
+  <div class="body">
+    <Heading class="row-title">
+      <a href={href}>{post.data.title}</a>
+    </Heading>
+    {!compact && <p class="muted excerpt">{describe(post)}</p>}
+    {!compact && <TagList lang={lang} tags={post.data.tags} />}
+  </div>
+  <span class="row-arrow" aria-hidden="true">
+    →
+  </span>
 </article>
 
 <style>
-  .post-card {
-    position: relative;
+  .body {
     display: grid;
     gap: var(--space-3);
-  }
-  .title {
-    font-size: var(--step-1);
-    letter-spacing: normal;
-  }
-  .title a {
-    color: var(--text);
-    text-decoration: none;
-  }
-  /* Whole card is clickable via the title link; tags stay above it. */
-  .title a::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: var(--radius);
-  }
-  .post-card:hover .title a {
-    color: var(--accent);
-  }
-  .post-card:has(.title a:focus-visible) {
-    outline: var(--focus-w) solid var(--focus);
-    outline-offset: var(--focus-offset);
-  }
-  .title a:focus-visible {
-    outline: none;
   }
   .excerpt {
     max-width: var(--measure);

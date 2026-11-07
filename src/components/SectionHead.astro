@@ -1,0 +1,19 @@
+---
+// Numbered section header: "01  Title ............ link →"
+export interface Props {
+  id: string;
+  index: number;
+  title: string;
+  href?: string;
+  linkText?: string;
+}
+const { id, index, title, href, linkText } = Astro.props;
+---
+
+<div class="section-head">
+  <span class="section-index" aria-hidden="true">
+    {String(index).padStart(2, '0')}
+  </span>
+  <h2 id={id}>{title}</h2>
+  {href && linkText && <a href={href}>{linkText} →</a>}
+</div>

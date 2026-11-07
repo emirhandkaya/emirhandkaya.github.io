@@ -1,7 +1,7 @@
 ---
-// Bio from research/profile-notes.md only (spec §2): Valmeto (self-described founder),
-// FRC 10141 Turing Robotics (Halil Bekmezci Anadolu Lisesi, approved), interests, İstanbul (approved).
+// Bio from research/profile-notes.md (OWNER-CV, Owner decisions, Browser pass).
 import Base from '../../layouts/Base.astro';
+import SectionHead from '../../components/SectionHead.astro';
 import { LANGS, localizedPath, t, type Lang } from '../../i18n';
 
 export function getStaticPaths() {
@@ -9,22 +9,23 @@ export function getStaticPaths() {
 }
 
 const lang = Astro.params.lang as Lang;
+const blocks = ['entrepreneur', 'robotics', 'sports', 'writing', 'education'] as const;
 ---
 
 <Base lang={lang} title={t(lang, 'about.title')} description={t(lang, 'about.description')} path="about">
-  <div class="container">
+  <div class="container about">
     <header class="page-head">
       <h1>{t(lang, 'about.title')}</h1>
+      <p class="lede">{t(lang, 'about.lede')}</p>
     </header>
     <div class="prose bio">
-      <p class="lede">{t(lang, 'about.entrepreneur')}</p>
-      <p>{t(lang, 'about.robotics')}</p>
-      <p class="todo mono">{t(lang, 'about.roleTodo')}</p>
-      <p>{t(lang, 'about.writing')}</p>
+      {blocks.map((b) => (
+        <p>{t(lang, `about.${b}`)}</p>
+      ))}
     </div>
-    <nav class="more" aria-labelledby="more">
-      <h2 id="more">{t(lang, 'about.more')}</h2>
-      <ul class="cluster" role="list">
+    <nav class="section" aria-labelledby="more">
+      <SectionHead id="more" index={1} title={t(lang, 'about.more')} />
+      <ul class="cluster more" role="list">
         <li>
           <a class="button" href={localizedPath(lang, 'projects')}>
             {t(lang, 'about.toProjects')}
@@ -36,7 +37,7 @@ const lang = Astro.params.lang as Lang;
           </a>
         </li>
         <li>
-          <a class="button" href={localizedPath(lang, 'contact')}>
+          <a class="button button--primary" href={localizedPath(lang, 'contact')}>
             {t(lang, 'about.toContact')}
           </a>
         </li>
@@ -47,24 +48,18 @@ const lang = Astro.params.lang as Lang;
 
 <style>
   .lede {
-    font-size: var(--step-1);
+    font-size: var(--step-2);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    max-width: var(--measure);
   }
-  .todo {
-    font-size: var(--step--1);
+  .bio p {
     color: var(--text-muted);
-    border: var(--border-w) dashed var(--border);
-    border-radius: var(--radius-sm);
-    padding: var(--space-2) var(--space-3);
+  }
+  .bio p::first-line {
+    color: var(--text);
   }
   .more {
-    margin-block-start: var(--space-7);
-    display: grid;
-    gap: var(--space-4);
-  }
-  .more h2 {
-    font-size: var(--step-1);
-  }
-  .more ul {
     list-style: none;
     padding: 0;
   }

@@ -28,10 +28,10 @@ const tags = projectTags(projects);
       <p class="mono muted">{tn(lang, 'projects.count', projects.length)}</p>
     </header>
     <TagFilter lang={lang} tags={tags} />
-    <ul class="grid" role="list">
-      {projects.map((project) => (
+    <ul class="rows projects" role="list">
+      {projects.map((project, i) => (
         <li data-tags={project.data.tags.map(tagSlug).join(' ')}>
-          <ProjectCard project={project} lang={lang} />
+          <ProjectCard project={project} lang={lang} index={i + 1} />
         </li>
       ))}
     </ul>
@@ -39,18 +39,10 @@ const tags = projectTags(projects);
 </Base>
 
 <style>
-  .grid {
-    display: grid;
-    gap: var(--space-4);
-    list-style: none;
-    padding: 0;
+  .projects {
+    border-block: var(--border-w) solid var(--border);
   }
-  .grid > [hidden] {
+  .projects > [hidden] {
     display: none;
-  }
-  @media (min-width: 48rem) {
-    .grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
   }
 </style>

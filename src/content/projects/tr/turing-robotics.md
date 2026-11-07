@@ -1,10 +1,11 @@
 ---
-# Facts: research/profile-notes.md (FIRST-TEAM, FIRST-AWARDS, PRESS, Owner decisions).
+# Facts: research/profile-notes.md (FIRST-TEAM, FIRST-AWARDS, PRESS, OWNER-CV, Owner decisions).
 title: 'Turing Robotics — FRC #10141'
-summary: 'Halil Bekmezci Anadolu Lisesi’nin FIRST Robotics Competition takımı; 2026 İstanbul Regional’ın "Regional Winners" ödülü.'
+summary: 'Kurduğum FIRST Robotics Competition takımı: 2026 İstanbul Regional şampiyonu, Houston katılım hakkı; 2027’de Bosphorus ve Gotham Regional, Boeing, 3M, RTX ve Rockwell hibeleriyle.'
 lang: tr
 date: 2025-01-01 # rookie year 2025 (FIRST-TEAM); shown as the year only
-tags: [robotik, frc, stem]
+tags: [robotik, frc, stem, liderlik]
+role: 'Kurucu ve eski takım kaptanı · Baş mentor'
 status: active
 featured: true
 order: 1
@@ -13,22 +14,25 @@ links:
     url: https://frc-events.firstinspires.org/team/10141
   - label: 2026 İstanbul Regional ödülleri
     url: https://frc-events.firstinspires.org/2026/TUIS/awards
-  - label: GirişimcilikTürk TV haberi
+  - label: GirişimcilikTürk TV röportajı
     url: https://girisimciturk.tv/girisimcilik/turkiyeden-dunya-sahnesine-bir-robotik-takiminin-basari-hikayesi/
 ---
 
-<!-- TODO (owner): Emirhan's role in the team is not stated in any source; add it to the `role` field once confirmed. -->
-
 ## Problem
 
-FIRST Robotics Competition (FRC), takımların her sezonun oyunu için bir robot tasarlayıp ürettiği ve programladığı uluslararası bir lise robotik yarışmasıdır.
+FIRST Robotics Competition (FRC), takımların her sezonun oyunu için kısa sürede bir robot tasarlayıp ürettiği ve programladığı uluslararası bir lise robotik yarışmasıdır.
 
 ## Yaklaşım
 
-Turing Robotics, Halil Bekmezci Anadolu Lisesi’nin FRC takımıdır (takım numarası 10141, ilk sezonu 2025). Takım finans, iletişim ve mühendislik gruplarıyla örgütlenmiştir. Emirhan takımın bir üyesidir; GirişimcilikTürk TV haberi onu takımın öne çıkan üyelerinden biri olarak anlatır.
+Halil Bekmezci Anadolu Lisesi’nde Turing Robotics’i 2025’te kurdum ve takım kaptanlığı yaptım; bugün baş mentor olarak devam ediyorum. Takım finans, iletişim ve mühendislik gruplarıyla örgütlendi. Robotik bana mühendislik, liderlik ve problem çözme becerileri kazandırdı.
 
 ## Sonuç
 
-- 2026 İstanbul Regional’da (sezon oyunu: _REBUILT presented by Haas_) **"Regional Winners"** ödülü.
-- Takım, Houston’daki FIRST Championship’e katılma hakkı kazandı.
-- Takımın hikâyesi 9 Nisan 2026’da GirişimcilikTürk TV’de yayımlandı: “Türkiye’den Dünya Sahnesine: Bir Robotik Takımının Başarı Hikâyesi”.
+- **2026 İstanbul Regional şampiyonu** (“Regional Winners”, sezon oyunu _REBUILT presented by Haas_) — takımın ilk sezonunda.
+- Houston’daki **FIRST Championship**’e katılma hakkı kazandık.
+- Takımın hikâyesini 9 Nisan 2026’da GirişimcilikTürk TV’ye anlattım: [“Türkiye’den Dünya Sahnesine: Bir Robotik Takımının Başarı Hikâyesi”](https://girisimciturk.tv/girisimcilik/turkiyeden-dunya-sahnesine-bir-robotik-takiminin-basari-hikayesi/).
+
+## 2027 sezonu
+
+- **Yarışmalar:** 2027 Bosphorus Regional ve 2027 Gotham Regional (New York).
+- **Destekçiler:** 2027 sezonu için **Boeing**, **3M**, **RTX** ve **Rockwell**’den hibe aldık.

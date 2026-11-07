@@ -202,6 +202,105 @@ time,
   padding: 0;
 }
 
+/* Editorial sections: numbered head with a rule, then rows separated by rules */
+.section {
+  padding-block-start: var(--space-8);
+}
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2) var(--space-4);
+  padding-block-start: var(--space-4);
+  margin-block-end: var(--space-5);
+  border-block-start: var(--border-w) solid var(--border);
+}
+.section-index {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--accent);
+}
+.section-head h2 {
+  font-size: var(--step-2);
+  margin-inline-end: auto;
+}
+.section-head a {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+}
+.rows {
+  list-style: none;
+  padding: 0;
+}
+.rows > li + li {
+  border-block-start: var(--border-w) solid var(--border);
+}
+.rows--ruled {
+  border-block: var(--border-w) solid var(--border);
+}
+.row {
+  position: relative;
+  display: grid;
+  gap: var(--space-2) var(--space-5);
+  padding-block: var(--space-5);
+}
+.row-meta {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-mono);
+  color: var(--text-muted);
+}
+.row-title {
+  font-size: var(--step-1);
+  letter-spacing: normal;
+}
+.row-title a {
+  color: var(--text);
+  text-decoration: none;
+}
+.row-title a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+.row-title a:focus-visible {
+  outline: none;
+}
+.row:has(.row-title a:focus-visible) {
+  outline: var(--focus-w) solid var(--focus);
+  outline-offset: var(--focus-offset);
+  border-radius: var(--radius-sm);
+}
+.row-arrow {
+  display: none;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  transition:
+    translate var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+.row:hover .row-title a {
+  color: var(--accent);
+}
+.row:hover .row-arrow {
+  color: var(--accent);
+  translate: var(--reveal-shift) 0;
+}
+.row .tags,
+.row .tag-list {
+  position: relative;
+  z-index: 1;
+}
+@media (min-width: 48rem) {
+  .row {
+    grid-template-columns: var(--row-meta-w) minmax(0, 1fr) auto;
+    align-items: baseline;
+  }
+  .row-arrow {
+    display: block;
+  }
+}
+
 /* Surfaces */
 .card {
   background: var(--surface);

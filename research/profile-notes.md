@@ -115,3 +115,21 @@ Source keys:
   - ORCID iD: 0000-0003-4183-3247 → https://orcid.org/0000-0003-4183-3247
   - Instagram: ufens30 → https://www.instagram.com/ufens30/
   - Medium: ufens → https://medium.com/@ufens
+
+## Owner-provided CV (2026-11-07, pasted by Emirhan in chat; source key OWNER-CV) — high (self-reported)
+
+- Valmeto İç ve Dış Ticaret Ltd. Şti. — Founder (2026–present); manages export operations and business development in international trade.
+- Turing Robotics, FRC Team 10141 — Founder & former team captain; Lead Mentor (2025–present). Resolves the "role unknown" gap above.
+  - 2026 İstanbul Regional champion (FIRST award name: "Regional Winners"); qualified for the FIRST Championship (Houston).
+  - 2027 season: the team will attend the 2027 Bosphorus Regional and the 2027 Gotham Regional (plan).
+  - 2027 season: grants received from Boeing, 3M, RTX and Rockwell (owner, in chat).
+  - Developed engineering, leadership and problem-solving skills through robotics.
+- Turkish Rugby Federation — Central Referee Committee member & referee (2025–2026); national-level referee governance, officiates official matches.
+- Rugby, licensed athlete: 2025 national team tryouts; Men's 1st League (2025–2026); U18 1st League (2024–2025); 2025 İstanbul school champion & group champion; 2024 İstanbul school champion.
+- Basketball: licensed player & high school team (2021–2023). Kickboxing: licensed athlete (2015–2018).
+- Technical skills: SolidWorks (intermediate), web development (advanced), Python (intermediate), robotics engineering (advanced).
+- Education: Halil Bekmezci Anadolu Lisesi, İstanbul — graduated June 2025 (owner chose to publish).
+- Projects: TÜBİTAK 4006 Science Fair — led an applied science project (2025); Young Entrepreneurs — digital project lead (2023).
+- Research: articles on physics & philosophy (conceptual analysis).
+- Interests: creative writing, physics, philosophy, international trade. Languages: Turkish (native), English (B2).
+- Press: the GirişimcilikTürk TV article (PRESS, 9 April 2026) is an interview Emirhan gave about the team (owner) — use it as "interview".
