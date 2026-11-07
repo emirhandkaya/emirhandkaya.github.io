@@ -101,3 +101,9 @@ Source keys:
 - Second email address (not the public contact email) — do not use
 - Instagram handle — ask
 - ORCID iD — ask
+
+## Owner decisions (2026-11-07, from Emirhan in chat)
+- APPROVED for use: city (İstanbul); school name (Halil Bekmezci Anadolu Lisesi, FRC 10141 Turing Robotics); Instagram + Medium links; ORCID iD.
+- NOT approved: birth date / age, second email, Valmeto registered address. Public contact stays emirhandurmuskaya@gmail.com.
+- Houston: the team qualified for the FIRST Championship (Houston) but did not attend — source: owner — high. On the site, say "qualified", never "competed".
+- Lead achievement: İstanbul Regional "Regional Winners" (cite the FIRST listing in the notes above).
