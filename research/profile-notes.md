@@ -107,7 +107,8 @@ Source keys:
 
 ## Owner decisions (2026-11-07, from Emirhan in chat)
 
-- APPROVED for use: city (İstanbul); school name (Halil Bekmezci Anadolu Lisesi, FRC 10141 Turing Robotics); Instagram + Medium links; ORCID iD.
+- City of residence: WITHDRAWN (owner, 2026-11-07, later in chat: "don't write İstanbul"). Do not state where he lives; event names such as "İstanbul Regional" stay.
+- APPROVED for use: school name (Halil Bekmezci Anadolu Lisesi, FRC 10141 Turing Robotics); Instagram + Medium links; ORCID iD.
 - NOT approved: birth date / age, second email, Valmeto registered address. Public contact stays emirhandurmuskaya@gmail.com.
 - Houston: the team qualified for the FIRST Championship (Houston) but did not attend — source: owner — high. On the site, say "qualified", never "competed".
 - Lead achievement: İstanbul Regional "Regional Winners" (cite the FIRST listing in the notes above).
